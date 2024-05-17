@@ -63,3 +63,6 @@ logs/
 # Ignore les fichiers d'installation de Composer
 /composer.lock
 
+# Ignore les fichiers DS_Store
+.DS_Store
+
