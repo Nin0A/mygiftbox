@@ -3,6 +3,7 @@
   "require" : {
     "php": ">=8.2",
     "slim/slim": "^4.0",
+    "php-di/php-di": "^6.0",
     "slim/psr7": "^1.6",
     "ramsey/uuid": "^4.0",
     "illuminate/database":"^11.0",
