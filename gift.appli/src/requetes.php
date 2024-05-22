@@ -93,7 +93,6 @@
     // $prestations_6_2 = Prestation::find('14872d96-97d6-4a9f-8a28-463886fea622');
     // $prestations_6_3 = Prestation::find('63cdce06-cd63-4fbe-9695-885d3cb64c7b');
 
-    // $new_box->prestation()->attach($prestations_6_1->id, ['quantite' => 111] );
+    // $new_box->prestation()->attach($prestations_6_1->id, ['quantite' => 111]);
     // $new_box->prestation()->attach($prestations_6_2->id, ['quantite' => 222]);
     // $new_box->prestation()->attach($prestations_6_3->id, ['quantite' => 333]);
-
