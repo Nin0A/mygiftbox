@@ -12,6 +12,11 @@ return function (\Slim\App $app): \Slim\App {
         return $response;
     });
 
+    $app->get('/categories[/]', function (Request $request, Response $response, $args) {
+        $response->getBody()->write("test!");
+        return $response;
+    });
+
     return $app;
 
 };

@@ -31,7 +31,7 @@ return array(
     'PhpDocReader\\' => array($vendorDir . '/php-di/phpdoc-reader/src/PhpDocReader'),
     'Laravel\\SerializableClosure\\' => array($vendorDir . '/laravel/serializable-closure/src'),
     'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
-    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/macroable', $vendorDir . '/illuminate/conditionable', $vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/support'),
+    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/conditionable', $vendorDir . '/illuminate/macroable', $vendorDir . '/illuminate/support'),
     'Illuminate\\Database\\' => array($vendorDir . '/illuminate/database'),
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
     'Illuminate\\Container\\' => array($vendorDir . '/illuminate/container'),
