@@ -14,3 +14,9 @@
 | Documentation                                     | /                                       | / |
 | Ajustement des routes & fichier httpd.conf        | /                                       | / |
 
+### TD3 : routes, actions, modèles
+| **Nino**                                          | **Dimitri**                             | **Lina** |
+|:-:                                                |:-:                                      |:-:|
+| Écriture du code                                  | /                                       | / |
+| Documentation                                     | /                                       | / |
+| Factorisation du code                             | /                                       | / |
