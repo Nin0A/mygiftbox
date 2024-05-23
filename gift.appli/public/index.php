@@ -8,7 +8,7 @@ $app = AppFactory::create();
 
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, false, false);
-$app->setBasePath('/projets/mygiftbox/gift.appli/public');
+$app->setBasePath('/mygiftbox/gift.appli/public');
 
 
 //ajout de "/" devant "../src"
