@@ -1,4 +1,4 @@
-# mygiftbox
+# 🌟 mygiftbox 🌟
 ## Nino Arcelin, Lina Terras, Dimitri Walczak-Vela-Mena
 ### TD1
 | Nino                                          | Dimitri                             | Lina |
