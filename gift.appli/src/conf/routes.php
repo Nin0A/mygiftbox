@@ -1,60 +1,49 @@
 <?php
 declare(strict_types=1);
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use gift\appli\app\actions\GetCategorieIdAction;
+use gift\appli\app\actions\PostBoxCreateAction;
+use gift\appli\app\actions\GetBoxCreateAction;
+use gift\appli\app\actions\GetDefaultAction;
+use gift\appli\app\actions\GetPrestationAction;
+use gift\appli\utils\Eloquent;
 
-
-//BD
-use gift\appli\models\Categorie;
-use gift\appli\models\Box;
-use Illuminate\Database\Capsule\Manager as DB;
-use gift\appli\app\PrestationController;
-use gift\appli\app\CreateBoxController;
-use gift\appli\app\PostCreateBoxController;
-use gift\appli\app\CategoriesController;
-/**
- * Initialisation de la base de donnée
- */
-$db = new DB();
-
-$db->addConnection(parse_ini_file("gift.db.conf.ini.dist"));
-
-$db->setAsGlobal();
-$db->bootEloquent();
+/* Initialisation de la base de donnée */
+Eloquent::init(__DIR__ . '/gift.db.conf.ini.dist');
 
 
 return function (\Slim\App $app): \Slim\App {
 
     //Route par défaut
-    $app->get('/', function (Request $request, Response $response, $args) {
-        $response->getBody()->write("Hello!");
-        return $response;
-    });
-
+    $app->get('/', GetDefaultAction::class);
     
     /**
      * GET /categorie/{id}
      */
-    $app->get('/categories[/{id}]', CategoriesController::class);
 
+    $app->get('/categories/{id}', GetCategorieIdAction::class);
 
+     /**
+     * GET /categorie/
+     */
+    $app->get('/categories[/]', GetCategorieIdAction::class);
 
     /**
      * GET /prestation
      */
-    $app->get('/prestation', PrestationController::class);
+
+    $app->get('/prestation', GetPrestationAction::class);
 
     /**
      * GET /box/create pour la méthode get on affiche le formulaire
      */
-    $app->get('/box/create', CreateBoxController::class);
+    $app->get('/box/create', GetBoxCreateAction::class);
+
 
     /**
      * POST /box/create pour la méthode post on affiche la catégorie correspondante au formulaire rempli
      */
-
-    $app->post('/box/create', PostCreateBoxController::class);
+    $app->post('/box/create', PostBoxCreateAction::class);
 
     return $app;
 };

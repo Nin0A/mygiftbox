@@ -11,7 +11,6 @@
     use gift\appli\models\Box;
     use gift\appli\models\Categorie;
     use gift\appli\models\Prestation;
-    use gift\appli\models\User;
 
     use Illuminate\Database\Capsule\Manager as DB;
 
