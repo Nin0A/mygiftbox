@@ -1,6 +1,6 @@
 <?php
 
-namespace gift\appli\utils;
+namespace gift\appli\infrastructure\utils;
 
 //BD
 use Illuminate\Database\Capsule\Manager as DB;

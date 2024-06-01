@@ -1,5 +1,5 @@
 <?php
-namespace gift\appli\models;
+namespace gift\appli\core\domain\models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Box extends \Illuminate\Database\Eloquent\Model

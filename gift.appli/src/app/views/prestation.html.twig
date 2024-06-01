@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Prestation{% endblock %}
+
+{% block content %}
+    <h2>{{ prestation.libelle }}</h2>
+    <p>{{ prestation.description }}</p>
+    <a href="{{ url_for('categorie_details', {'id':prestation.cat_id}, {}) }}">Retour à la catégorie</a>
+
+{% endblock %}

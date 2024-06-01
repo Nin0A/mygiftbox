@@ -10,17 +10,7 @@ use Slim\Views\Twig;
 
 class GetBoxCreateAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
-
-         //création du formulaire
-//         $res='  <form action="./create" method="post">
-//         <label for="inputString">Entrez ID de box :</label>
-//         <input type="text" id="inputString" name="inputString" required>
-//         <button type="submit">Soumettre</button>
-//         </form>';
-//
-//        $response->getBody()->write($res);
-//        return $response;
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'get_box_create.twig');//
+        return $view->render($response, 'get_box_create.html.twig');
     }
 }

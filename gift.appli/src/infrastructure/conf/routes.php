@@ -6,10 +6,8 @@ use gift\appli\app\actions\PostBoxCreateAction;
 use gift\appli\app\actions\GetBoxCreateAction;
 use gift\appli\app\actions\GetDefaultAction;
 use gift\appli\app\actions\GetPrestationAction;
-use gift\appli\models\Categorie;
-use gift\appli\utils\Eloquent;
-use Slim\Exception\HttpBadRequestException;
-use Slim\Views\Twig;
+use gift\appli\infrastructure\utils\Eloquent;
+
 /* Initialisation de la base de donnée */
 Eloquent::init(__DIR__ . '/gift.db.conf.ini.dist');
 
@@ -23,32 +21,23 @@ return function (\Slim\App $app): \Slim\App {
      * GET /categorie/{id}
      */
 
-    $app->get('/categories/{id}', function ($request, $response, $args) {
-        $category = Categorie::find($args['id']);
-
-        if (!$category) {
-            throw new HttpBadRequestException($request, "Categories not found");
-        }
-
-        $view = Twig::fromRequest($request);
-        return $view->render($response, 'categories.twig', ['categorie' => $category]);
-    });
+    $app->get('/categories/{id}', GetCategorieIdAction::class)->setName('categorie_details');;
 
      /**
      * GET /categorie/
      */
-    $app->get('/categories[/]', GetCategorieIdAction::class);
+    $app->get('/categories[/]', GetCategorieIdAction::class)->setName('categories_list');;
 
     /**
      * GET /prestation
      */
 
-    $app->get('/prestation', GetPrestationAction::class);
+    $app->get('/prestation', GetPrestationAction::class)->setName('prestation');;
 
     /**
      * GET /box/create pour la méthode get on affiche le formulaire
      */
-    $app->get('/box/create', GetBoxCreateAction::class);
+    $app->get('/box/create', GetBoxCreateAction::class)->setName('box_creation');;
 
 
     /**

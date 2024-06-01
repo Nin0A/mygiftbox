@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Catégories{% endblock %}
+
+{% block content %}
+    <h2>Liste des Catégories</h2>
+    <ul>
+        {% for categorie in categories %}
+            <li>
+                <a href="{{ url_for('categorie_details', {'id': categorie.id}) }}">{{ categorie.libelle }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

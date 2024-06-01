@@ -1,15 +1,22 @@
-<html>
+{% extends 'base.html.twig' %}
 
-<head>
-    <title>Catégorie</title>
-</head>
+{% block title %}Détails de la Catégorie{% endblock %}
 
-<body>
-    <h1>Catégorie ID : {{ categorie.id }}</h1>
+{% block content %}
+    <h2>{{ categorie.libelle }}</h2>
+    <p>{{ categorie.description }}</p>
+
+    <h3>Prestations</h3>
     <ul>
-        <li>{{ categorie.libelle }} {{ categorie.description }})
-        </li>
-    </ul>
-</body>
+        {% for prestation in prestations %}
+            <li>
+                <a href="{{ url_for('prestation', {}, { 'id': prestation.id }) }}">{{prestation.libelle}}</a><br>
+                
+            </li>
+        {% endfor %}
 
-</html>
+    </ul>
+
+            <a href="{{ url_for('categories_list', {}, {}) }}">Retour à Liste des catégories</a>
+
+{% endblock %}
