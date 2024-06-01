@@ -19,4 +19,11 @@
 |:-:                                                |:-:                                      |:-:|
 | Écriture du code                                  | Écriture du code                        | / |
 | Documentation                                     | /                                       | / |
-| Factorisation du code                             | /                                       | / |
+|        /                                          | /                                       | / |
+
+### TD5 : architecture app-noyau-infrastructure
+| **Nino**                                          | **Dimitri**                             | **Lina** |
+|:-:                                                |:-:                                      |:-:|
+| Écriture du code                                  | Écriture du code                        | / |
+| Documentation                                     | /                                       | / |
+| Création de la nouvelle structure du projet       | /                                       | / |
