@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Application{% endblock %}</title>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
     <header>
-        <h1>My Gift Box</h1>
+        <h1 class="sitename">My<br>Gift<br>Box<img src="/img-css/giftbox-logo.svg"></h1>
+
+        <nav class="navigation">
+                <a href="/">Home</a>
+                <a href="/categories">Catalog</a>
+                <a href="/">About Us</a>
+
+        </nav>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/categories">Categories</a></li>
-        </ul>
-    </nav>
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
     <footer>
-        <p>&copy; Nino Arcelin / Lina Teras / Dimitri Walczak-Vela-Mena / 2023-2024</p>
+
+        <p>&copy; Nino Arcelin / Lina Teras / Dimitri Walczak-Vela-Mena</p>
+        <p>RA-DWM 2023-2024</p>
+
     </footer>
 
 </body>

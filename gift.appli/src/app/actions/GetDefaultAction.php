@@ -12,6 +12,7 @@ class GetDefaultAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
         //Route par défaut
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'base.html.twig');
+
+        return $view->render($response, 'welcome_page.html.twig');
     }
 }

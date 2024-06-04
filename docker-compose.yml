@@ -1,6 +1,10 @@
 version: '3.8'
 
 services:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4206e87 (maj projet css)
   db:
     image: mariadb:latest
     container_name: giftbox_db
@@ -13,25 +17,44 @@ services:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
+<<<<<<< HEAD
       - "3307:3306"
 
   php:
     image: php:7.4-apache
+=======
+      - "10024:3306"
+
+  php:
+    image: canals/php:8.2
+>>>>>>> 4206e87 (maj projet css)
     container_name: giftbox_php
     volumes:
       - ./gift.appli/public:/var/www/html
       - ./shared/img:/var/www/html/img
       - ./gift.appli/src:/var/www/src
     ports:
+<<<<<<< HEAD
       - "8082:80"
     depends_on:
       - db
+=======
+      - "10025:80"
+    depends_on:
+      - db
+    
+>>>>>>> 4206e87 (maj projet css)
 
   adminer:
     image: adminer:latest
     container_name: adminer
     ports:
+<<<<<<< HEAD
       - "8081:8080"
+=======
+      - "10127:8080"
+    command : php -S 0.0.0.0:8080 -t /var/www/html
+>>>>>>> 4206e87 (maj projet css)
 
 volumes:
   db_data:

@@ -1,0 +1,110 @@
+@startuml Diagramme de Classe
+
+' Définition des classes
+package "Model" {
+    package "Entités Eloquent" {
+        class Box {
+            +UUID id
+            +UUID createur_id
+        }
+
+        class Categorie {
+            +UUID id
+            +String nom
+        }
+
+        class Prestation {
+            +UUID id
+            +UUID cat_id
+            +String nom
+            +int quantite
+        }
+
+        class User {
+            +UUID id
+            +String nom
+        }
+    }
+
+    class Coffret {
+        +UUID id
+        +UUID user_id
+        +String nom
+        +String description
+        +Boolean is_gift
+        +String message
+        +String status
+        +String access_token
+    }
+}
+
+' Définition des services métiers
+package "Services métiers" {
+    class CatalogueService {
+        +array getCategories()
+        +array getCategorieById(int id)
+        +array getPrestationById(string id)
+        +array getPrestationsByCategorie(int categ_id)
+        +void createCategorie(array values)
+        +void modificatePrestation(array properties)
+        +void definirOuModifierCategoriePrestation(int prestationId, int categorieId)
+        +array getPrestations()
+        +array getPrestationDetails(string id)
+        +array getPrestationsSortedByPrice(string order)
+    }
+
+    class CoffretService {
+        +Coffret createCoffret(array values)
+        +void addPrestationToCoffret(int coffretId, string prestationId, int quantite)
+        +array getCoffretDetails(int coffretId)
+        +void validateCoffret(int coffretId)
+        +void payCoffret(int coffretId)
+        +void removePrestationFromCoffret(int coffretId, string prestationId)
+        +void updatePrestationQuantityInCoffret(int coffretId, string prestationId, int quantite)
+        +string generateCoffretAccessUrl(int coffretId)
+    }
+
+    class AuthService {
+        +User register(array data)
+        +User login(string email, string password)
+        +array getUserCoffrets(int userId)
+    }
+
+    class PredefinedBoxService {
+        +array getPredefinedBoxes()
+        +array getBoxDetails(int boxId)
+        +Coffret createCoffretFromBox(int userId, int boxId)
+    }
+
+    class ApiService {
+        +array getPrestations()
+        +array getCategories()
+        +array getPrestationsByCategorie(int categorieId)
+        +array getCoffretDetails(int coffretId)
+    }
+}
+
+' Associations entre les classes
+Box "0..*" ---> "1" User
+Box "1" <--- "1..*" User
+
+Box "*" ---> "*" Prestation
+Prestation "*" ---> "*" Box
+
+Prestation "1" ---> "1" Categorie
+Categorie "*" ---> "*" Prestation
+
+Coffret "1" ---> "1" User
+Coffret "*" ---> "*" Prestation
+
+' Associations entre les services et les entités
+CatalogueService "1" ---> "*" Categorie
+CatalogueService "*" ---> "*" Prestation
+CoffretService "1" ---> "1" Coffret
+CoffretService "*" ---> "*" Prestation
+AuthService "1" ---> "1" User
+PredefinedBoxService "1" ---> "*" Box
+PredefinedBoxService "1" ---> "1" Coffret
+ApiService "1" ---> "1" Coffret
+
+@enduml
