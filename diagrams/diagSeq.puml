@@ -1,0 +1,76 @@
+@startuml
+
+
+
+
+
+
+actor User
+participant "GetBoxCreateAction" as S
+participant "CoffretService" as CS
+participant "Catalog" as C1
+participant "Categories" as C2
+participant "Prestations" as P
+
+
+box "routes"
+   note right of S
+        '...' = nom des routes (voir routes.php)
+    end note 
+end box
+
+
+
+User -> S: Methode "Get" : 'box_creation'
+activate S
+
+
+
+
+S -> C1: GetAllPrestations()
+activate C1
+loop for each categories
+    
+    C1 -> C2: GetCategories()
+    activate C2
+    C2 -> P: GetPrestations(categorie_id)
+    activate P
+    P --> C2: Prestations List
+    deactivate P
+    C2 --> C1: Categories List
+    deactivate C2
+end loop
+C1 --> S: Prestations List 
+deactivate C1
+
+S --> User: reponse : 'box_creation'
+deactivate S
+
+User -> S: Methode "Post" : 'box_creation'
+activate S
+
+S -> CS: CreateGiftBox()
+activate CS
+CS --> S: Gift Box Created
+deactivate CS
+
+
+S --> User: reponse : Create Empty Gift Box
+deactivate S
+
+User -> S: Methode "Post" : 'box_creation'
+activate S
+
+S -> CS: Add Item to Gift Box
+activate CS
+CS --> S: Item Added
+deactivate CS
+
+S -> CS: Validate Gift Box
+activate CS
+CS --> S: Gift Box Validated
+deactivate CS
+
+S --> User: reponse : 'box_creation'
+deactivate S
+@enduml
