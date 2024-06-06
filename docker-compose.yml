@@ -7,7 +7,6 @@ services:
     container_name: giftbox_db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
       #MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
@@ -34,6 +33,7 @@ services:
     container_name: adminer
     command: php -S 0.0.0.0:8080 -t /var/www/html
     ports:
+
       - "19036:8080"
 
 volumes:
