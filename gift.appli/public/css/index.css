@@ -10,7 +10,11 @@
 
 }
 
+<<<<<<< HEAD
 header{
+=======
+.nav-bar{
+>>>>>>> 37061e1 (ajout du css)
 
     box-sizing: border-box;
     padding: 0px 15px 0px 55px;
@@ -20,17 +24,27 @@ header{
     background-color: #fec7d7;
 }
 
+<<<<<<< HEAD
 body {
     margin: 0;
 }
 
 .navigation a{
+=======
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.navigation a {
+>>>>>>> 37061e1 (ajout du css)
     color: #0e172c;
     padding: 6px 15px;
     border-radius: 20px;
     margin: 0 10px;
     font-size: 1.2em;
     text-decoration: none;
+<<<<<<< HEAD
     font-weight:600;
 }
 
@@ -42,6 +56,21 @@ body {
 
 }
 
+=======
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigation a:hover,
+.navigation a.active {
+    background-color: #0e172c;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+
+>>>>>>> 37061e1 (ajout du css)
 .sitename{
     font-size: 2em;
     display: flex;
@@ -54,6 +83,7 @@ body {
     height: auto;
     margin-right: 10px;
 }
+<<<<<<< HEAD
 
 .title{
     text-align: center;
@@ -131,3 +161,40 @@ body {
 footer{
     text-align: center;
 }
+=======
+footer{
+    text-align: center;
+}
+
+.navigation a.active {
+}
+
+
+.account-img{
+    width: 40px;
+    height: auto;
+    background-color: transparent;
+    
+}
+
+.account{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 40px;    
+}
+
+.account > div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.account > div > a{
+    text-decoration: none;
+}
+
+.account > div > a:hover{
+    text-decoration: underline;
+}
+>>>>>>> 37061e1 (ajout du css)

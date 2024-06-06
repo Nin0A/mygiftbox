@@ -1,12 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Catégories{% endblock %}
+{% block title %}Liste des Catégories
+{% endblock %}
 
 {% block content %}
-    <form action="./create" method="post">
-        <label for="inputString">Entrez ID de box :</label>
-        <input type="text" id="inputString" name="inputString" required>
-        <button type="submit">Soumettre</button>
-    </form>
+	<link
+	rel="stylesheet" href="/css/create-box-page.css">
 
+	{# <form action="./create" method="post">
+					<label for="inputString">Entrez ID de box :</label>
+					<input type="text" id="inputString" name="inputString" required>
+					<button type="submit">Soumettre</button>
+				</form> #}
+
+	<div class="parts">
+
+		<div class="gift-list"></div>
+
+		<div class="gift">
+            <img src="/img-css/full-gift.svg">
+        </div>
+
+		<div class="box form-box">
+			<header class="header-form">Create Box</header>
+
+			<form action="./create" method="post">
+				<div class="field input">
+					<label for="email">Nom</label>
+					<input type="text" name="email" id="email" autocomplete="off" required>
+				</div>
+
+				<div class="field input">
+					<label for="password">Description</label>
+					<input type="password" name="password" id="password" autocomplete="off" required>
+				</div>
+
+                <div class="checkbox-section">
+				<p class="header-checkbox">It is a gift ?</p>
+				<div class="checkbox-wrapper-10">
+					<input class="tgl tgl-flip" id="cb5" type="checkbox" checked/>
+					<label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="cb5"></label>
+                  
+				</div>
+                </div>
+
+                  <div class="field input">
+                    <label for="password">Gift Message</label>
+					<input type="password" name="password" id="password" autocomplete="off" required>
+                    </div>
+
+				<div class="field">
+
+					<input type="submit" class="btn" name="submit" value="Login" required>
+				</div>
+				<div class="links">
+					Don't have account?
+					<a href="register.php">Sign Up Now</a>
+				</div>
+			</form>
+		</div>
+
+	</div>
 {% endblock content %}

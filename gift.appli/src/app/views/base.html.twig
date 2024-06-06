@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+<<<<<<< HEAD
     <header>
         <h1 class="sitename">My<br>Gift<br>Box<img src="/img-css/giftbox-logo.svg"></h1>
 
@@ -27,7 +28,44 @@
         <p>&copy; Nino Arcelin / Lina Teras / Dimitri Walczak-Vela-Mena</p>
         <p>RA-DWM 2023-2024</p>
 
+=======
+    <header class="nav-bar">
+        <h1 class="sitename">My<br>Gift<br>Box<img src="/img-css/giftbox-logo.svg"></h1>
+        <nav class="navigation">
+            <a href="/">Home</a>
+            <a href="{{ url_for('categories_list', {},) }}">Catalog</a>
+            <a href="">Our Products</a>
+            <a href="{{ url_for('box_creation', {},) }}">My boxes</a>
+            <a href="">Shopping Cart</a>
+            <a href="">About Us</a>
+        </nav>
+        <div class="account">
+            <img class="account-img" src="/img-css/account.svg">
+            <div>
+                <a href="">Account</a>
+            </div>
+        </div>
+    </header>
+   
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>&copy; Nino Arcelin / Lina Teras / Dimitri Walczak-Vela-Mena</p>
+        <p>RA-DWM 2023-2024</p>
+>>>>>>> 37061e1 (ajout du css)
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const currentLocation = window.location.pathname;
+            const menuItem = document.querySelectorAll('.navigation a');
+            const menuLength = menuItem.length;
+            for (let i = 0; i < menuLength; i++) {
+                if (menuItem[i].getAttribute('href') === currentLocation) {
+                    menuItem[i].className += " active";
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -10,6 +10,9 @@ use Slim\Views\Twig;
 
 class GetBoxCreateAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
+
+        //catalogue service
+
         $view = Twig::fromRequest($request);
         return $view->render($response, 'get_box_create.html.twig');
     }

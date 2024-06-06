@@ -1,0 +1,155 @@
+.title{
+    text-align: center;
+    font-size: 2em;
+}
+
+.card-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 2rem;
+    margin: 20px auto;
+    padding: 1% 10%;
+    position: relative;
+}
+
+.introduction {
+    width: 70%;
+    text-align: center; 
+    margin: 0 auto; 
+    font-weight: 600;
+}
+
+
+.card-grid div{
+    background-color: rgb(217,212,231);
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    transform-style: preserve-3d;
+}
+
+.card{
+    padding: 2.5rem;
+    border-radius: 4px;
+}
+
+.image-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    border-radius: 50%;
+}
+
+.sun-shine {
+    position: absolute;
+    width: 140px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotateSunShine 20s linear infinite;
+}
+
+.sun-image, .eye-image {
+    position: absolute;
+    width: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes rotateSunShine {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.connection-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.connection-buttons button{
+    margin: 10px;
+    padding: 10px 20px 10px 20px;
+    font-weight: 600;
+    font-size: 1.1em;
+    width: 150px;
+}
+
+/* CSS */
+.connection-buttons button {
+  align-items: center;
+  background-color: #fec7d7;
+  border: 2.5px solid #0e172c;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #0e172c;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.connection-buttons .signin-button {
+    background-color: #fff;
+  }
+
+.connection-buttons button:after {
+  background-color: #0e172c;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.connection-buttons button:hover:after {
+  transform: translate(0, 0);
+}
+
+.connection-buttons button:active {
+  outline: 0;
+}
+
+.connection-buttons .signin-button:active{
+    background-color: #0e172c;
+    color: #fff;
+
+}
+
+.connection-buttons button:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+    .connection-buttons button {
+    padding: 0 40px;
+  }
+}

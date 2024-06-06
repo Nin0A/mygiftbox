@@ -3,20 +3,27 @@
 {% block title %}Détails de la Catégorie{% endblock %}
 
 {% block content %}
-    <h2>{{ categorie.libelle }}</h2>
-    <p>{{ categorie.description }}</p>
+    <link rel="stylesheet" href="/css/categorie-view-page.css">
 
-    <h3>Prestations</h3>
-    <ul>
-        {% for prestation in prestations %}
-            <li>
-                <a href="{{ url_for('prestation', {}, { 'id': prestation.id }) }}">{{prestation.libelle}}</a><br>
-                
-            </li>
+    <h2 class="title">{{ categorie.libelle }}</h2>
+    <p class="introduction">{{ categorie.description }}</p>
+
+    <div class="grid-prestation">
+        {% for prestation in prestations %} 
+            <div>
+                <a href="{{ url_for('prestation', {}, { 'id': prestation.id }) }}">
+                    <img class="img-product" src="/pictures/{{prestation.img}}">
+                </a>
+                <div class="header-prestation">
+                    <p>{{prestation.libelle}}</p>
+                    <p>€{{prestation.tarif}}</p>
+                </div>
+                <p class="description">{{prestation.description}}</p>
+            </div>
         {% endfor %}
-
-    </ul>
-
-            <a href="{{ url_for('categories_list', {}, {}) }}">Retour à Liste des catégories</a>
+    </div>
+    <div class="container-back">
+    <a class="back" href="{{ url_for('categories_list', {}, {}) }}"><p>Back to Categories</p></a>
+    </div>
 
 {% endblock %}

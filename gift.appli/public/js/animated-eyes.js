@@ -6,6 +6,12 @@ const sunShine = document.querySelector('.sun-shine');
 let sunX = 0;
 let sunY = 0;
 
+<<<<<<< HEAD
+=======
+let shineX = 0;
+let shineY = 0;
+
+>>>>>>> 37061e1 (ajout du css)
 document.addEventListener('mousemove', function (e) {
     // Mouvement du soleil
     const sunRect = sunImage.getBoundingClientRect();
@@ -24,9 +30,15 @@ document.addEventListener('mousemove', function (e) {
     const shinedeltaX = e.clientX - shinecenterX;
     const shinedeltaY = e.clientY - shinecenterY;
     const shinemaxSunMovement = 10; // Ajuster la distance maximale de déplacement du soleil
+<<<<<<< HEAD
     sunX += (shinedeltaX / 180 - sunX) * 0.1; // Ajout d'une inertie pour un mouvement plus fluide
     sunY += (shinedeltaY / 180 - sunY) * 0.1; // Ajout d'une inertie pour un mouvement plus fluide
     sunShine.style.transform = `translate(-50%, -50%) translate(${sunX}px, ${sunY}px)`;
+=======
+    shineX += (shinedeltaX / 180 - sunX) * 0.8; // Ajout d'une inertie pour un mouvement plus fluide
+    shineY += (shinedeltaY / 180 - sunY) * 0.8; // Ajout d'une inertie pour un mouvement plus fluide
+    sunShine.style.transform = `translate(-50%, -50%) translate(${shineX}px, ${sunY}px)`;
+>>>>>>> 37061e1 (ajout du css)
 
 
     // Mouvement des yeux
