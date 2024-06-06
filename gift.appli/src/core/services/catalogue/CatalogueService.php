@@ -116,4 +116,18 @@ class CatalogueService implements CatalogueInterface
 
         $prestation->save();
     }
+
+    public function sortPrestationByTarif(int $categ_id): array
+    {
+        try {
+            $prestations = Prestation::where('cat_id', '=', $categ_id)->orderBy('tarif', 'asc')->get();
+
+            if (!$prestations) throw new ModelNotFoundException();
+
+            return $prestations->toArray();
+
+        } catch (ModelNotFoundException $e) {
+            throw new CatalogueServiceNotFoundException("Erreur interne", 500);
+        }
+    }
 }

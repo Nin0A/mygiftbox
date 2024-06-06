@@ -28,7 +28,7 @@ class GetCategorieIdAction extends AbstractAction
 
                 return $view->render($response, 'categorieView.html.twig', [
                     'categorie' => $catalogueService->getCategorieById($args['id']),
-                    'prestations' => $catalogueService->getPrestationsbyCategorie($args['id'])
+                    'prestations' => $catalogueService->sortPrestationByTarif($args['id'])
                 ]);
 
             } else {
