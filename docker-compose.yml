@@ -15,11 +15,9 @@ services:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "3307:3306"
       - "64238:3306"
 
   php:
-    image: php:7.4-apache
     image: canals/php:8.2
     container_name: giftbox_php
     volumes:
@@ -27,7 +25,6 @@ services:
       - ./shared/img:/var/www/html/img
       - ./gift.appli/src:/var/www/src
     ports:
-      - "8082:80"
       - "22004:80"
     depends_on:
       - db
@@ -37,7 +34,6 @@ services:
     container_name: adminer
     command: php -S 0.0.0.0:8080 -t /var/www/html
     ports:
-      - "8081:8080"
       - "19036:8080"
 
 volumes:

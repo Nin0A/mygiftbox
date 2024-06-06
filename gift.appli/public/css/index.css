@@ -10,11 +10,9 @@
 
 }
 
-<<<<<<< HEAD
-header{
-=======
+
 .nav-bar{
->>>>>>> 37061e1 (ajout du css)
+
 
     box-sizing: border-box;
     padding: 0px 15px 0px 55px;
@@ -24,39 +22,20 @@ header{
     background-color: #fec7d7;
 }
 
-<<<<<<< HEAD
-body {
-    margin: 0;
-}
 
-.navigation a{
-=======
 body{
     margin: 0;
     padding: 0;
 }
 
 .navigation a {
->>>>>>> 37061e1 (ajout du css)
+
     color: #0e172c;
     padding: 6px 15px;
     border-radius: 20px;
     margin: 0 10px;
     font-size: 1.2em;
     text-decoration: none;
-<<<<<<< HEAD
-    font-weight:600;
-}
-
-.navigation a:hover,
-.navigation a.active{
-    background-color: #0e172c;
-    color: #fff;
-    font-weight: 600;
-
-}
-
-=======
     font-weight: 600;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -70,7 +49,6 @@ body{
 
 
 
->>>>>>> 37061e1 (ajout du css)
 .sitename{
     font-size: 2em;
     display: flex;
@@ -83,85 +61,7 @@ body{
     height: auto;
     margin-right: 10px;
 }
-<<<<<<< HEAD
 
-.title{
-    text-align: center;
-    font-size: 2em;
-}
-
-.card-grid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-gap: 2rem;
-    margin: 20px auto;
-    padding: 1% 10%;
-    position: relative;
-}
-
-.introduction {
-    width: 70%; /* Largeur maximale */
-    text-align: center; /* Centre le texte horizontalement */
-    margin: 0 auto; /* Centre l'élément lui-même */
-    font-weight: 600;
-}
-
-
-.card-grid div{
-    background-color: rgb(217,212,231);
-    opacity: 1;
-    transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-    transform-style: preserve-3d;
-}
-
-.card{
-    padding: 2.5rem;
-    border-radius: 4px;
-}
-
-.image-card {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-
-    border-radius: 50%;
-}
-
-.sun-shine {
-    position: absolute;
-    width: 140px;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotateSunShine 20s linear infinite; /* Animation de rotation */
-}
-
-.sun-image, .eye-image {
-    position: absolute;
-    width: 100px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes rotateSunShine {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-
-footer{
-    text-align: center;
-}
-=======
 footer{
     text-align: center;
 }
@@ -197,4 +97,4 @@ footer{
 .account > div > a:hover{
     text-decoration: underline;
 }
->>>>>>> 37061e1 (ajout du css)
+
