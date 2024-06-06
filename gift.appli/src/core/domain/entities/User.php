@@ -1,5 +1,5 @@
 <?php
-namespace gift\appli\core\domain\models;
+namespace gift\appli\core\domain\entities;
 
 class User extends \Illuminate\Database\Eloquent\Model
 {
@@ -15,6 +15,6 @@ class User extends \Illuminate\Database\Eloquent\Model
      * Association vers Box 
      */
     public function box() {
-        return $this->hasMany('gift\appli\models\User', 'id');
+        return $this->hasMany('gift\appli\core\domain\entities\User', 'id');
     } 
 }

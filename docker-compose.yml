@@ -7,14 +7,15 @@ services:
     container_name: giftbox_db
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      #MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "64238:3306"
+
+      - "10024:3306"
 
   php:
     image: canals/php:8.2
@@ -24,17 +25,20 @@ services:
       - ./shared/img:/var/www/html/img
       - ./gift.appli/src:/var/www/src
     ports:
-      - "22004:80"
+
+      - "10025:80"
     depends_on:
       - db
+
 
   adminer:
     image: adminer:latest
     container_name: adminer
-    command: php -S 0.0.0.0:8080 -t /var/www/html
     ports:
 
-      - "19036:8080"
+
+      - "10127:8080"
+    command : php -S 0.0.0.0:8080 -t /var/www/html
 
 volumes:
   db_data:

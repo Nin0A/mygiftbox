@@ -1,5 +1,5 @@
 <?php
-namespace gift\appli\core\domain\models;
+namespace gift\appli\core\domain\entities;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Box extends \Illuminate\Database\Eloquent\Model
@@ -18,14 +18,14 @@ class Box extends \Illuminate\Database\Eloquent\Model
      * Association vers User
      */
     public function user() {
-        return $this->belongsTo('gift\appli\models\User', 'createur_id');
+        return $this->belongsTo('gift\appli\core\domain\entities\User', 'createur_id');
         } 
     
     /**
      * Association vers Prestation par table Pivot box2presta
      */
     public function prestation() {
-        return $this->belongsToMany('gift\appli\models\Box',
+        return $this->belongsToMany('gift\appli\core\domain\entities\Box',
                                     'box2presta',
                                     'box_id',
                                     'presta_id')

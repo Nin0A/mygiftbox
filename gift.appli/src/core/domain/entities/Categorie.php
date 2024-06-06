@@ -1,5 +1,5 @@
 <?php
-namespace gift\appli\core\domain\models;
+namespace gift\appli\core\domain\entities;
 
 class Categorie extends \Illuminate\Database\Eloquent\Model
 {
@@ -15,6 +15,6 @@ class Categorie extends \Illuminate\Database\Eloquent\Model
      * Association vers Prestation
      */
     public function prestation() {
-        return $this->hasMany('gift\appli\models\Prestation', 'id');
+        return $this->hasMany('gift\appli\core\domain\entities\Prestation', 'id');
         } 
 }

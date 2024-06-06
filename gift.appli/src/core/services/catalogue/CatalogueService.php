@@ -4,8 +4,8 @@
 namespace gift\appli\core\services\catalogue;
 
 use gift\appli\core\services\catalogue\CatalogueInterface;
-use gift\appli\core\domain\models\Categorie;
-use gift\appli\core\domain\models\Prestation;
+use gift\appli\core\domain\entities\Categorie;
+use gift\appli\core\domain\entities\Prestation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
