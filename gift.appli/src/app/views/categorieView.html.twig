@@ -8,6 +8,13 @@
     <h2 class="title">{{ categorie.libelle }}</h2>
     <p class="introduction">{{ categorie.description }}</p>
 
+    <form method="get" class="form-select">
+        <select name="order" onchange="this.form.submit()" class="custom-select">
+            <option value="asc" {% if order == 'asc' %}selected{% endif %}>Croissant</option>
+            <option value="desc" {% if order == 'desc' %}selected{% endif %}>Décroissant</option>
+        </select>
+    </form>
+
     <div class="grid-prestation">
         {% for prestation in prestations %} 
             <div>

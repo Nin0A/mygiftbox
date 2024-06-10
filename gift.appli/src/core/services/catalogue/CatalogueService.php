@@ -117,10 +117,10 @@ class CatalogueService implements CatalogueInterface
         $prestation->save();
     }
 
-    public function sortPrestationByTarif(int $categ_id): array
+    public function sortPrestationByTarif(int $categ_id, string $order = 'asc'): array
     {
         try {
-            $prestations = Prestation::where('cat_id', '=', $categ_id)->orderBy('tarif', 'asc')->get();
+            $prestations = Prestation::where('cat_id', '=', $categ_id)->orderBy('tarif', $order)->get();
 
             if (!$prestations) throw new ModelNotFoundException();
 

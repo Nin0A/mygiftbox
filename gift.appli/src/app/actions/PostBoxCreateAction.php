@@ -3,7 +3,7 @@
 namespace gift\appli\app\actions;
 
 use gift\appli\app\actions\AbstractAction;
-use gift\appli\core\domain\models\Box;
+use gift\appli\core\domain\entities\Box;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;

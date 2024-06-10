@@ -45,5 +45,17 @@ return function (\Slim\App $app): \Slim\App {
      */
     $app->post('/box/create', PostBoxCreateAction::class);
 
+
+    /**
+     * GET /sort pour la méthode get on affiche le formulaire
+     */
+    $app->get('/sortpresta', GetSortPrestation::class)->setName('sort');;
+
+
+    /**
+     * POST sort pour la méthode post on affiche la catégorie correspondante au formulaire rempli
+     */
+    $app->post('/sortpresta', PostSortPrestation::class);
+
     return $app;
 };
