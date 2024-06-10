@@ -53,3 +53,4 @@ class PostBoxModifiedAction extends AbstractAction
         }
     }
 }
+

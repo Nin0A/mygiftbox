@@ -2,7 +2,7 @@
 
 .parts {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 0.8fr; /* Les deux premières colonnes prennent chacune 1 fraction, et la troisième colonne prend 0.5 fraction */
+  grid-template-columns: 0.5fr 1fr 0.7fr; /* Les deux premières colonnes prennent chacune 1 fraction, et la troisième colonne prend 0.5 fraction */
   gap: 20px;
   align-items: flex-end;
 }
@@ -420,10 +420,24 @@ footer{
   padding: 4px 4px 4px 12px;
   border-radius: 6px;
   margin: 10px;
+  background-color:#e8e8e865;
 }
 
 .gift-item:hover{
-  background-color: rgba(238, 238, 238, 0.605);
+  background-color: rgba(228, 228, 228, 0.784);
 
 }
 
+
+.gift-item h3{
+  margin: 2px;
+}
+
+.gift-item p{
+  margin: 2px;
+}
+
+
+a{
+  text-decoration: none;
+}
