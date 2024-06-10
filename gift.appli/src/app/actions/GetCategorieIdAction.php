@@ -25,10 +25,12 @@ class GetCategorieIdAction extends AbstractAction
         try {
             
             if (isset($args['id'])) {
+                $order = $request->getQueryParams()['order'] ?? 'asc';
 
                 return $view->render($response, 'categorieView.html.twig', [
                     'categorie' => $catalogueService->getCategorieById($args['id']),
-                    'prestations' => $catalogueService->sortPrestationByTarif($args['id'])
+                    'prestations' => $catalogueService->sortPrestationByTarif($args['id'], $order),
+                    'order' => $order,
                 ]);
 
             } else {
