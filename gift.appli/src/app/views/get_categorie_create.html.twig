@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de catégorie
+{% endblock %}
+
+{% block content %}
+
+	<link rel="stylesheet" href="/css/categorie-create.css">
+
+	<div class="container">
+		<div class="box form-box">
+			<header class="header-form">New Categorie</header>
+
+			<form action="./create" method="post">
+				<div class="field input">
+					<label for="email">Libelle</label>
+					<input type="text" name="libelle" id="libelle" autocomplete="off" required>
+				</div>
+
+				<div class="field input">
+					<label for="password">Description</label>
+					<input type="text" name="description" id="description" autocomplete="off" required>
+				</div>
+
+				<div class="field">
+
+					<input type="submit" class="btn" name="submit" value="Validate" required>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

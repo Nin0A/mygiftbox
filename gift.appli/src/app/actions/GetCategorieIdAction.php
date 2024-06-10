@@ -31,6 +31,7 @@ class GetCategorieIdAction extends AbstractAction
                     'categorie' => $catalogueService->getCategorieById($args['id']),
                     'prestations' => $catalogueService->sortPrestationByTarif($args['id'], $order),
                     'order' => $order,
+
                 ]);
 
             } else {

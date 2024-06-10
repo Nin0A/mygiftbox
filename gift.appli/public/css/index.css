@@ -50,10 +50,11 @@ body{
 
 
 .sitename{
-    font-size: 2em;
+    font-size: 1.6em;
     display: flex;
     flex-direction: row-reverse;
     color :#0e172c;
+    margin: 8px;
 }
 
 .sitename img{

@@ -25,7 +25,7 @@ class Box extends \Illuminate\Database\Eloquent\Model
      * Association vers Prestation par table Pivot box2presta
      */
     public function prestation() {
-        return $this->belongsToMany('gift\appli\core\domain\entities\Box',
+        return $this->belongsToMany('gift\appli\core\domain\entities\Prestation',
                                     'box2presta',
                                     'box_id',
                                     'presta_id')

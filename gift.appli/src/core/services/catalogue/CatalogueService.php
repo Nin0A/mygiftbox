@@ -7,6 +7,8 @@ use gift\appli\core\services\catalogue\CatalogueInterface;
 use gift\appli\core\domain\entities\Categorie;
 use gift\appli\core\domain\entities\Prestation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use \gift\appli\app\utils\CsrfService;
+use Illuminate\Database\QueryException;
 
 
 class CatalogueService implements CatalogueInterface
@@ -23,6 +25,23 @@ class CatalogueService implements CatalogueInterface
             if (!$categories) throw new ModelNotFoundException();
 
             return $categories->toArray();
+
+        } catch (ModelNotFoundException $e) {
+            throw new CatalogueServiceNotFoundException("Erreur interne", 500);
+        }
+
+       
+    }
+
+    public function getPrestations(): array
+    {
+        try {
+
+            $prestations = Prestation::all();
+
+            if (!$prestations) throw new ModelNotFoundException();
+
+            return $prestations->toArray();
 
         } catch (ModelNotFoundException $e) {
             throw new CatalogueServiceNotFoundException("Erreur interne", 500);
@@ -89,12 +108,26 @@ class CatalogueService implements CatalogueInterface
     }
 
     public function createCategorie(array $values): void
-    {
+{
+    try {
+        // Vérification du token CSRF
+        CsrfService::check($values['csrf']);
+        
+        // Validation des données
+        if ($values['libelle'] !== filter_var($values['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS) ||
+            $values['description'] !== filter_var($values['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS)) {
+            throw new CatalogueServiceInvalidDataException("Les données ne sont pas valides");
+        }
 
-        $newCategoryId = Categorie::create($values)->id;
-
+        // Création de la nouvelle catégorie
+        $newCategory = new Categorie();
+        $newCategory->libelle = filter_var($values['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newCategory->description = filter_var($values['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newCategory->save();
+    } catch (QueryException $e) {
+        throw new CatalogueServiceNoDataFoundException("Erreur de sauvegarde", 500);
     }
-
+}
     public function modificatePrestation(array $properties): void
     {
         $prestationId = $properties['id'];
@@ -117,6 +150,7 @@ class CatalogueService implements CatalogueInterface
         $prestation->save();
     }
 
+
     public function sortPrestationByTarif(int $categ_id, string $order = 'asc'): array
     {
         try {
@@ -130,4 +164,5 @@ class CatalogueService implements CatalogueInterface
             throw new CatalogueServiceNotFoundException("Erreur interne", 500);
         }
     }
+
 }

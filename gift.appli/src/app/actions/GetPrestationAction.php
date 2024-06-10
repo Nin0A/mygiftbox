@@ -3,7 +3,6 @@
 namespace gift\appli\app\actions;
 
 use gift\appli\app\actions\AbstractAction;
-use gift\appli\core\domain\models\Prestation;
 use gift\appli\core\services\catalogue\CatalogueService;
 use gift\appli\core\services\catalogue\CatalogueServiceNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;

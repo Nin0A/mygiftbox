@@ -7,58 +7,126 @@
 	<link
 	rel="stylesheet" href="/css/create-box-page.css">
 
-	{# <form action="./create" method="post">
-					<label for="inputString">Entrez ID de box :</label>
-					<input type="text" id="inputString" name="inputString" required>
-					<button type="submit">Soumettre</button>
-				</form> #}
-
 	<div class="parts">
 
-		<div class="gift-list"></div>
+		<div class="gift-list">
+			{% for coffret in coffrets %}
+				<a href="{{ url_for('box_modified', {'id':coffret.id}, { }) }}">
+					<div class="gift-item">
+						<h3 class="coffret_libelle">{{ coffret.libelle }}</h3>
+						<p class="montant">€{{ coffret.montant }}</p>
+					</div>
+				</a>
+
+
+			{% endfor %}
+
+		</div>
 
 		<div class="gift">
-            <img src="/img-css/full-gift.svg">
-        </div>
+			<img src="/img-css/full-gift.svg">
+		</div>
 
 		<div class="box form-box">
 			<header class="header-form">Create Box</header>
 
-			<form action="./create" method="post">
+			<form action="{% if currentCoffret is defined %}{{ url_for('post_box_modified', {'id':currentCoffret.id}, { }) }}{% else %}{{ url_for('box_creation', {}, { }) }}{% endif %}" method="post">
 				<div class="field input">
-					<label for="email">Nom</label>
-					<input type="text" name="email" id="email" autocomplete="off" required>
+					<label for="libelle">Name</label>
+
+
+					<input type="text" name="libelle" id="libelle" autocomplete="off" value="{% if currentCoffret is defined %}{{ currentCoffret.libelle }}{% endif %}" required>
 				</div>
 
 				<div class="field input">
-					<label for="password">Description</label>
-					<input type="password" name="password" id="password" autocomplete="off" required>
+					<label for="description">Description</label>
+					<input type="text" name="description" id="description" autocomplete="off" value="{% if currentCoffret is defined %}{{ currentCoffret.description }}{% endif %}" required>
 				</div>
 
-                <div class="checkbox-section">
-				<p class="header-checkbox">It is a gift ?</p>
-				<div class="checkbox-wrapper-10">
-					<input class="tgl tgl-flip" id="cb5" type="checkbox" checked/>
-					<label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="cb5"></label>
-                  
-				</div>
-                </div>
+				<div class="checkbox-section">
+					<p class="header-checkbox">It is a gift ?</p>
+					<div class="checkbox-wrapper-10">
+						<input class="tgl tgl-flip" id="cb5" type="checkbox" name="kdo" {% if currentCoffret is defined %} {% if currentCoffret.kdo ==1 %} checked {% endif %} {% endif %}/>
+						<label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="cb5"></label>
 
-                  <div class="field input">
-                    <label for="password">Gift Message</label>
-					<input type="password" name="password" id="password" autocomplete="off" required>
-                    </div>
+					</div>
+				</div>
+
+				<div class="field input">
+					<label for="message_kdo">Gift Message</label>
+					<input type="text" name="message_kdo" id="message_kdo" value="{% if currentCoffret is defined %}{{ currentCoffret.message_kdo }}{% endif %}" autocomplete="off" required>
+				</div>
+
+				<p class="header-prestations">Prestations</p>
+
+				<div class="add-prestations-window">
+					<div class="tool-bar">
+
+						<select name="options" id="options">
+							<option value="option1">Option 1</option>
+							<option value="option2">Option 2</option>
+							<option value="option3">Option 3</option>
+							<option value="option4">Option 4</option>
+
+						</select>
+
+						<input type="text" name="recherche" id="recherche" placeholder="Recherche" autocomplete="off">
+
+
+					</div>
+					<div class="prestations-to-add">
+
+
+						{% for prestation in prestations %}
+							<div class="header-prest">
+								<h3 class="title">{{ prestation.libelle }}</h3>
+								<p>€{{ prestation.tarif }}</p>
+
+								<div class="checkbox-wrapper-18">
+									<div class="round">
+										<input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.id %} checked {% endif %} {% endfor %} {% endif %}/>
+
+										<label for="checkbox-{{ loop.index }}"></label>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+
+
+					</div>
+				</div>
+
+				<input type="hidden" name="csrf" value="{{ csrf }}">
+
 
 				<div class="field">
-
-					<input type="submit" class="btn" name="submit" value="Login" required>
-				</div>
-				<div class="links">
-					Don't have account?
-					<a href="register.php">Sign Up Now</a>
+					<input type="submit" class="btn" name="submit" value="Save" required>
 				</div>
 			</form>
 		</div>
 
 	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+const checkbox = document.getElementById('cb5');
+const giftMessageField = document.getElementById('message_kdo');
+const label = document.querySelector('.tgl-btn');
+
+function toggleGiftMessage() {
+if (checkbox.checked) {
+giftMessageField.disabled = false;
+} else {
+giftMessageField.disabled = true;
+giftMessageField.value = '';
+}
+}
+
+// Initial state
+toggleGiftMessage();
+
+// Listen for changes
+checkbox.addEventListener('change', toggleGiftMessage);
+});
+	</script>
 {% endblock content %}

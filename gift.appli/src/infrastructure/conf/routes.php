@@ -4,8 +4,13 @@ declare(strict_types=1);
 use gift\appli\app\actions\GetCategorieIdAction;
 use gift\appli\app\actions\PostBoxCreateAction;
 use gift\appli\app\actions\GetBoxCreateAction;
+use gift\appli\app\actions\PostCategorieCreateAction;
+use gift\appli\app\actions\GetCategorieCreateAction;
 use gift\appli\app\actions\GetDefaultAction;
 use gift\appli\app\actions\GetPrestationAction;
+use gift\appli\app\actions\GetBoxModifiedAction;
+use gift\appli\app\actions\PostBoxModifiedAction;
+
 use gift\appli\infrastructure\utils\Eloquent;
 
 /* Initialisation de la base de donnée */
@@ -26,7 +31,7 @@ return function (\Slim\App $app): \Slim\App {
      /**
      * GET /categorie/
      */
-    $app->get('/categories[/]', GetCategorieIdAction::class)->setName('categories_list');;
+    $app->get('/categories', GetCategorieIdAction::class)->setName('categories_list');;
 
     /**
      * GET /prestation
@@ -47,15 +52,29 @@ return function (\Slim\App $app): \Slim\App {
 
 
     /**
-     * GET /sort pour la méthode get on affiche le formulaire
+     * GET /box/create pour la méthode get on affiche le formulaire
      */
-    $app->get('/sortpresta', GetSortPrestation::class)->setName('sort');;
+    $app->get('/box/modified/{id}', GetBoxModifiedAction::class)->setName('box_modified');
 
 
     /**
-     * POST sort pour la méthode post on affiche la catégorie correspondante au formulaire rempli
+     * POST /box/create pour la méthode post on affiche la catégorie correspondante au formulaire rempli
      */
-    $app->post('/sortpresta', PostSortPrestation::class);
+    $app->post('/box/modified/{id}', PostBoxModifiedAction::class)->setName('post_box_modified');
+
+
+    /**
+     * GET /categories/create pour la méthode get on affiche le formulaire
+     */
+    $app->get('/categorie/create', GetCategorieCreateAction::class)->setName('categorie_creation');;
+
+
+    /**
+     * POST /categories/create pour la méthode post on affiche la catégorie correspondante au formulaire rempli
+     */
+    $app->post('/categorie/create', PostCategorieCreateAction::class);
+
+
 
     return $app;
 };

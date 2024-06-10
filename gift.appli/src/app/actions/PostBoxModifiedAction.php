@@ -3,13 +3,11 @@
 namespace gift\appli\app\actions;
 
 use gift\appli\app\actions\AbstractAction;
-
 use gift\appli\core\services\coffret\CoffretService;
-
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class PostBoxCreateAction extends AbstractAction
+class PostBoxModifiedAction extends AbstractAction
 {
     public function __invoke(Request $request, Response $response, array $args): Response
     {
@@ -21,11 +19,10 @@ class PostBoxCreateAction extends AbstractAction
             $coffretService = new CoffretService();
 
             $kdo = isset($data['kdo']) && $data['kdo'] === 'on' ? 1 : 0;
-            //$montant = $data['montant'] === null ? 0 : $data['montant'];
             $montant=0;
 
-            $randomBytes = random_bytes(8); // 16 bytes = 32 caractères hexadécimaux
-            $uniqId = uniqid('', true); // Génère un identifiant unique basé sur la date et l'heure
+            $randomBytes = random_bytes(8);
+            $uniqId = uniqid('', true);
             $csrfToken = bin2hex($randomBytes) . bin2hex($uniqId);
 
             // Préparer les valeurs pour la création de la catégorie
@@ -38,18 +35,21 @@ class PostBoxCreateAction extends AbstractAction
                 //'createur_id' =>
                 'csrf' => $data['csrf'] ?? null,
                 'token' => $csrfToken,
+                'id'=> $args['id']
             ];
+
+            var_dump($args['id']);
 
             $prestations = $data['prestations'] ?? [];
 
             $values['prestations'] = $prestations;
             
-            $coffretService->createBox($values);
+            $coffretService->modifiedBox($values);
             
-            return $response->withHeader('Location', '/box/create')->withStatus(302);
+            return $response->withHeader('Location', '/box/modified/'.$args['id'])->withStatus(302);
         }else{
 
-            return $response->withHeader('Location', '/box/create')->withStatus(302);
+            return $response->withHeader('Location', '/box/modified/'.$args['id'])->withStatus(302);
         }
     }
 }
