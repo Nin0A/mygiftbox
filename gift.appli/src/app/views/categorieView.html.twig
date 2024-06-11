@@ -19,7 +19,7 @@
         {% for prestation in prestations %} 
             <div>
                 <a href="{{ url_for('prestation', {}, { 'id': prestation.id }) }}">
-                    <img class="img-product" src="/pictures/{{prestation.img}}">
+                    <img class="img-product" src="{{globals.img_dir}}/{{prestation.img}}">
                 </a>
                 <div class="header-prestation">
                     <p>{{prestation.libelle}}</p>

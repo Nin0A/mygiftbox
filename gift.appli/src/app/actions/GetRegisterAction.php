@@ -13,9 +13,6 @@ use Slim\Views\Twig;
 class GetRegisterAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
 
-        
-
-
         //catalogue service
         $view = Twig::fromRequest($request);
         return $view->render($response, 'register.html.twig',
