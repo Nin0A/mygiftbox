@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use gift\appli\app\actions\GetCategorieIdAction;
 use gift\appli\app\actions\GetLoginAction;
+use gift\appli\app\actions\GetLogoutAction;
 use gift\appli\app\actions\PostLoginAction;
 use gift\appli\app\actions\PostBoxCreateAction;
 use gift\appli\app\actions\GetBoxCreateAction;
@@ -14,6 +15,7 @@ use gift\appli\app\actions\GetBoxModifiedAction;
 use gift\appli\app\actions\PostBoxModifiedAction;
 use gift\appli\app\actions\GetRegisterAction;
 use gift\appli\app\actions\PostRegisterAction;
+
 
 
 use gift\appli\infrastructure\utils\Eloquent;
@@ -86,6 +88,9 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/account/register', GetRegisterAction::class)->setName('account_register');
 
     $app->post('/account/register', PostRegisterAction::class);
+
+    $app->get('/account/logout', GetLogoutAction::class)->setName('account_logout');
+
 
 
 

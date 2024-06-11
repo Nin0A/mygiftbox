@@ -18,9 +18,17 @@ class GetBoxCreateAction extends AbstractAction{
 
         $catalogueService = new CatalogueService();
 
+        $user=null;
+        if(isset($_SESSION['USER']))
+            $user=$_SESSION['USER'];
+
         $coffretService = new CoffretService();
-        $_SESSION['USER']=null;
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'get_box_create.html.twig',['prestations' => $catalogueService->getPrestations(), 'coffrets' => $coffretService->getBoxes(),'csrf'=> CsrfService::generate()]);
+        return $view->render($response, 'get_box_create.html.twig',
+        ['userIsLoggedIn'=>AuthService::isAuthenticate(),
+        'prestations' => $catalogueService->getPrestations(),
+        'user'=>$user,
+        'coffrets' => $coffretService->getBoxesByUser($_SESSION['USER']),
+        'csrf'=> CsrfService::generate()]);
     }
 }

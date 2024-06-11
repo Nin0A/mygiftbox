@@ -4,26 +4,26 @@ namespace gift\appli\app\actions;
 
 use gift\appli\app\actions\AbstractAction;
 use gift\appli\app\utils\CsrfService;
+use gift\appli\core\services\auth\AuthService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
-use gift\appli\core\services\auth\AuthService;
 
 
-
-class GetCategorieCreateAction extends AbstractAction{
+class GetLogoutAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
 
         //catalogue service
         $view = Twig::fromRequest($request);
 
-        $user=null;
-        if(isset($_SESSION['USER']))
-            $user=$_SESSION['USER'];
+        $authService = new AuthService();
 
-        return $view->render($response, 'get_categorie_create.html.twig',[
-            'userIsLoggedIn'=>AuthService::isAuthenticate(),
-            'user'=>$user,
-            'csrf'=> CsrfService::generate()]);
+        $user=null;
+
+        if(AuthService::isAuthenticate()) $user=$_SESSION['USER'];
+
+        $authService->logout();
+
+        return $view->render($response, 'welcome_page.html.twig',[ 'user'=>$user,'userIsLoggedIn'=>AuthService::isAuthenticate(),'csrf'=> CsrfService::generate()]);
     }
 }

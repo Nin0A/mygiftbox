@@ -31,6 +31,6 @@ class PostLoginAction {
         
 
         // Rediriger vers la liste des catégories après la création
-        return $response->withHeader('Location', '/account/login')->withStatus(302);
+        return $response->withHeader('Location', '/')->withStatus(302);
     }
 }

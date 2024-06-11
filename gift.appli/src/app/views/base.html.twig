@@ -13,17 +13,24 @@
         <a href="/">Home</a>
         <a href="{{ url_for('categories_list', {},) }}">Catalog</a>
         <a href="">Our Products</a>
-        <a href="{{ url_for('box_creation', {},) }}">My boxes</a>
-        <a href="">Shopping Cart</a>
+          {% if userIsLoggedIn is defined and userIsLoggedIn %}<a href="{{ url_for('box_creation', {},) }}">My boxes</a> {% endif %}
         <a href="">About Us</a>
     </nav>
     <div class="account">
         <img class="account-img" src="/img-css/account.svg">
         <div>
-            <a href="#" class="account-link">Account</a>
+            <a href="#" class="account-link"> {% if userIsLoggedIn is defined and userIsLoggedIn %}{{user}}{% else %}Account{% endif %}</a>
             <div class="account-options">
-                <a href="{{ url_for('account_login', {},) }}">Login</a>
-                <a href="{{ url_for('account_register', {},) }}">Register</a>
+                {% if userIsLoggedIn is defined and userIsLoggedIn %}
+                        <a href="">Shopping Cart</a>
+
+                    <a href="{{ url_for('account_logout', {},) }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('account_login', {},) }}">Login</a>
+                    <a href="{{ url_for('account_register', {},) }}">Register</a>
+                {% endif %}
+
+
             </div>
         </div>
     </div>

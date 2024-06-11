@@ -27,10 +27,10 @@ class PostRegisterAction {
 
         // Créer une nouvelle catégorie
     
-            $authService->register($values);
+        $authService->register($values);
         
 
         // Rediriger vers la liste des catégories après la création
-        return $response->withHeader('Location', '/account/register')->withStatus(302);
+        return $response->withHeader('Location', '/')->withStatus(302);
     }
 }

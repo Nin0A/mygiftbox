@@ -35,7 +35,6 @@ class PostBoxCreateAction extends AbstractAction
                 'montant' => $montant,
                 'kdo' => $kdo,
                 'message_kdo' => $data['message_kdo'] ?? '',
-                //'createur_id' =>
                 'csrf' => $data['csrf'] ?? null,
                 'token' => $csrfToken,
             ];

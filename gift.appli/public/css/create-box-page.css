@@ -156,11 +156,17 @@ main{
 }
 
 .gift{
-
+  padding-top: 30vh;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  flex-direction: column;
+}
+
+
+.gift p{
+  font-size: 2em;
 }
 
 .gift img{
@@ -414,6 +420,7 @@ footer{
 .gift-list{
   height: 85vh;
   overflow-y: auto;
+  border-right: solid 1px #000;
 }
 
 .gift-item{
@@ -440,4 +447,28 @@ footer{
 
 a{
   text-decoration: none;
+}
+
+
+.gift-create-button{
+  margin: 10px;
+  border-radius: 6px;
+  background-color: #2bb789;
+  height: 3em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.gift-create-button:hover{
+
+  background-color: #32d49e;
+
+}
+
+.gift-create-button h3{
+  color: rgb(255, 255, 255);
+  margin: 4px;
 }
