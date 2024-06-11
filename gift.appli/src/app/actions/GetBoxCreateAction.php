@@ -9,6 +9,8 @@ use Slim\Views\Twig;
 use gift\appli\core\services\coffret\CoffretService;
 use gift\appli\core\services\catalogue\CatalogueService;
 use gift\appli\app\utils\CsrfService;
+use gift\appli\core\services\auth\AuthService;
+
 
 
 class GetBoxCreateAction extends AbstractAction{
@@ -17,7 +19,7 @@ class GetBoxCreateAction extends AbstractAction{
         $catalogueService = new CatalogueService();
 
         $coffretService = new CoffretService();
-
+        $_SESSION['USER']=null;
         $view = Twig::fromRequest($request);
         return $view->render($response, 'get_box_create.html.twig',['prestations' => $catalogueService->getPrestations(), 'coffrets' => $coffretService->getBoxes(),'csrf'=> CsrfService::generate()]);
     }

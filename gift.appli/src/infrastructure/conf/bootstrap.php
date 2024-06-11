@@ -15,6 +15,6 @@ $twig = \Slim\Views\Twig::create('../src/app/views/',
                       'strict_variables' => true]);
 $app->add(\Slim\Views\TwigMiddleware::create($app, $twig));
 
-session_start(); //à déplacer quand la personne sera log
+session_start();
 
 return $app;

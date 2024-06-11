@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 use gift\appli\app\actions\GetCategorieIdAction;
+use gift\appli\app\actions\GetLoginAction;
+use gift\appli\app\actions\PostLoginAction;
 use gift\appli\app\actions\PostBoxCreateAction;
 use gift\appli\app\actions\GetBoxCreateAction;
 use gift\appli\app\actions\PostCategorieCreateAction;
@@ -10,6 +12,9 @@ use gift\appli\app\actions\GetDefaultAction;
 use gift\appli\app\actions\GetPrestationAction;
 use gift\appli\app\actions\GetBoxModifiedAction;
 use gift\appli\app\actions\PostBoxModifiedAction;
+use gift\appli\app\actions\GetRegisterAction;
+use gift\appli\app\actions\PostRegisterAction;
+
 
 use gift\appli\infrastructure\utils\Eloquent;
 
@@ -66,13 +71,23 @@ return function (\Slim\App $app): \Slim\App {
     /**
      * GET /categories/create pour la méthode get on affiche le formulaire
      */
-    $app->get('/categorie/create', GetCategorieCreateAction::class)->setName('categorie_creation');;
+    $app->get('/categorie/create', GetCategorieCreateAction::class)->setName('categorie_creation');
 
 
     /**
      * POST /categories/create pour la méthode post on affiche la catégorie correspondante au formulaire rempli
      */
     $app->post('/categorie/create', PostCategorieCreateAction::class);
+
+    $app->get('/account/login', GetLoginAction::class)->setName('account_login');
+
+    $app->post('/account/login', PostLoginAction::class);
+
+    $app->get('/account/register', GetRegisterAction::class)->setName('account_register');
+
+    $app->post('/account/register', PostRegisterAction::class);
+
+
 
 
 

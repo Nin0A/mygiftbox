@@ -67,7 +67,17 @@
     width: 100%;
 }
 .links{
-    margin-bottom: 15px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.links a{
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.links a:hover{
+  text-decoration: underline;
 }
 
 /********* Home *****************/

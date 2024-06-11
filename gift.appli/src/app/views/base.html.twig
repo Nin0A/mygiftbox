@@ -7,43 +7,34 @@
 </head>
 <body>
 
-    <header class="nav-bar">
-        <h1 class="sitename">My<br>Gift<br>Box<img src="/img-css/giftbox-logo.svg"></h1>
-        <nav class="navigation">
-            <a href="/">Home</a>
-            <a href="{{ url_for('categories_list', {},) }}">Catalog</a>
-            <a href="">Our Products</a>
-            <a href="{{ url_for('box_creation', {},) }}">My boxes</a>
-            <a href="">Shopping Cart</a>
-            <a href="">About Us</a>
-        </nav>
-        <div class="account">
-            <img class="account-img" src="/img-css/account.svg">
-            <div>
-                <a href="">Account</a>
+<header class="nav-bar">
+    <h1 class="sitename">My<br>Gift<br>Box<img src="/img-css/giftbox-logo.svg"></h1>
+    <nav class="navigation">
+        <a href="/">Home</a>
+        <a href="{{ url_for('categories_list', {},) }}">Catalog</a>
+        <a href="">Our Products</a>
+        <a href="{{ url_for('box_creation', {},) }}">My boxes</a>
+        <a href="">Shopping Cart</a>
+        <a href="">About Us</a>
+    </nav>
+    <div class="account">
+        <img class="account-img" src="/img-css/account.svg">
+        <div>
+            <a href="#" class="account-link">Account</a>
+            <div class="account-options">
+                <a href="{{ url_for('account_login', {},) }}">Login</a>
+                <a href="{{ url_for('account_register', {},) }}">Register</a>
             </div>
         </div>
-    </header>
-   
-    {% block content %}{% endblock %}
+    </div>
+</header>
 
-    <footer>
-        <p>&copy; Nino Arcelin / Lina Teras / Dimitri Walczak-Vela-Mena</p>
-        <p>RA-DWM 2023-2024</p>
+{% block content %}{% endblock %}
 
-    </footer>
+<footer>
+    <p>&copy; Nino Arcelin / Lina Teras / Dimitri Walczak-Vela-Mena</p>
+    <p>RA-DWM 2023-2024</p>
+</footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const currentLocation = window.location.pathname;
-            const menuItem = document.querySelectorAll('.navigation a');
-            const menuLength = menuItem.length;
-            for (let i = 0; i < menuLength; i++) {
-                if (menuItem[i].getAttribute('href') === currentLocation) {
-                    menuItem[i].className += " active";
-                }
-            }
-        });
-    </script>
 </body>
 </html>

@@ -4,7 +4,8 @@
   display: grid;
   grid-template-columns: 0.5fr 1fr 0.7fr; /* Les deux premières colonnes prennent chacune 1 fraction, et la troisième colonne prend 0.5 fraction */
   gap: 20px;
-  align-items: flex-end;
+  align-items: center;
+  
 }
 
 
@@ -18,7 +19,7 @@
     background: #fdfdfd;
     display: flex;
     flex-direction: column;
-    padding: 25px 25px 25px 25px;
+    padding: 14px 25px 14px 25px;
     border-radius: 20px;
     box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
                 0 32px 64px -48px rgba(0,0,0,0.5);
@@ -27,7 +28,6 @@
 }
 .form-box{
     margin: 10px 10px 10px 10px;
-    height: 75vh;
 }
 .form-box header{
     font-size: 25px;
