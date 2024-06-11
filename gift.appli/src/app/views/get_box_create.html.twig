@@ -1,132 +1,138 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Catégories
-{% endblock %}
+{% block title %}Liste des Catégories{% endblock %}
 
 {% block content %}
-	<link
-	rel="stylesheet" href="/css/create-box-page.css">
+<link rel="stylesheet" href="/css/create-box-page.css">
 
-	<div class="parts">
+<div class="parts">
+    <div class="gift-list">
+        {% for coffret in coffrets %}
+            <a href="{{ url_for('box_modified', {'id':coffret.id}, { }) }}">
+                <div class="gift-item">
+                    <h3 class="coffret_libelle">{{ coffret.libelle }}</h3>
+                    <p class="montant">€{{ coffret.montant }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 
-		<div class="gift-list">
-			{% for coffret in coffrets %}
-				<a href="{{ url_for('box_modified', {'id':coffret.id}, { }) }}">
-					<div class="gift-item">
-						<h3 class="coffret_libelle">{{ coffret.libelle }}</h3>
-						<p class="montant">€{{ coffret.montant }}</p>
-					</div>
-				</a>
+    <div class="gift">
+        <img src="/img-css/full-gift.svg">
+    </div>
 
+    <div class="box form-box">
+        <header class="header-form">Create Box</header>
 
-			{% endfor %}
+        <form action="{% if currentCoffret is defined %}{{ url_for('post_box_modified', {'id':currentCoffret.id}, { }) }}{% else %}{{ url_for('box_creation', {}, { }) }}{% endif %}" method="post">
+            <div class="field input">
+                <label for="libelle">Name</label>
+                <input type="text" name="libelle" id="libelle" autocomplete="off" value="{% if currentCoffret is defined %}{{ currentCoffret.libelle }}{% endif %}" required>
+            </div>
 
-		</div>
+            <div class="field input">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" autocomplete="off" value="{% if currentCoffret is defined %}{{ currentCoffret.description }}{% endif %}" required>
+            </div>
 
-		<div class="gift">
-			<img src="/img-css/full-gift.svg">
-		</div>
+            <div class="checkbox-section">
+                <p class="header-checkbox">It is a gift ?</p>
+                <div class="checkbox-wrapper-10">
+                    <input class="tgl tgl-flip" id="cb5" type="checkbox" name="kdo" {% if currentCoffret is defined %} {% if currentCoffret.kdo ==1 %} checked {% endif %} {% endif %}/>
+                    <label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="cb5"></label>
+                </div>
+            </div>
 
-		<div class="box form-box">
-			<header class="header-form">Create Box</header>
+            <div class="field input">
+                <label for="message_kdo">Gift Message</label>
+                <input type="text" name="message_kdo" id="message_kdo" value="{% if currentCoffret is defined %}{{ currentCoffret.message_kdo }}{% endif %}" autocomplete="off" required>
+            </div>
 
-			<form action="{% if currentCoffret is defined %}{{ url_for('post_box_modified', {'id':currentCoffret.id}, { }) }}{% else %}{{ url_for('box_creation', {}, { }) }}{% endif %}" method="post">
-				<div class="field input">
-					<label for="libelle">Name</label>
+            <p class="header-prestations">Prestations</p>
 
+            <div class="add-prestations-window">
+                <div class="tool-bar">
+                    <select name="options" id="options" onchange="updatePrestations()">
+                        <option value="">Select all Category</option>
+                        <option value="">categ1</option>
+                        <option value="">categ2</option>
+                        <option value="">categ3</option>
+                        <option value="">categ4</option>
+                    </select>
 
-					<input type="text" name="libelle" id="libelle" autocomplete="off" value="{% if currentCoffret is defined %}{{ currentCoffret.libelle }}{% endif %}" required>
-				</div>
+                    <input type="text" name="recherche" id="recherche" placeholder="Recherche" autocomplete="off">
+                </div>
+                <div class="prestations-to-add">
+                    {% for prestation in prestations %}
+                        <div class="header-prest">
+                            <h3 class="title">{{ prestation.libelle }}</h3>
+                            <p>€{{ prestation.tarif }}</p>
+                            <div class="checkbox-wrapper-18">
+                                <div class="round">
+                                    <input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.id %} checked {% endif %} {% endfor %} {% endif %}/>
+                                    <label for="checkbox-{{ loop.index }}"></label>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-				<div class="field input">
-					<label for="description">Description</label>
-					<input type="text" name="description" id="description" autocomplete="off" value="{% if currentCoffret is defined %}{{ currentCoffret.description }}{% endif %}" required>
-				</div>
+            <input type="hidden" name="csrf" value="{{ csrf }}">
 
-				<div class="checkbox-section">
-					<p class="header-checkbox">It is a gift ?</p>
-					<div class="checkbox-wrapper-10">
-						<input class="tgl tgl-flip" id="cb5" type="checkbox" name="kdo" {% if currentCoffret is defined %} {% if currentCoffret.kdo ==1 %} checked {% endif %} {% endif %}/>
-						<label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="cb5"></label>
+            <div class="field">
+                <input type="submit" class="btn" name="submit" value="Save" required>
+            </div>
+        </form>
+    </div>
+</div>
 
-					</div>
-				</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const checkbox = document.getElementById('cb5');
+    const giftMessageField = document.getElementById('message_kdo');
+    const label = document.querySelector('.tgl-btn');
 
-				<div class="field input">
-					<label for="message_kdo">Gift Message</label>
-					<input type="text" name="message_kdo" id="message_kdo" value="{% if currentCoffret is defined %}{{ currentCoffret.message_kdo }}{% endif %}" autocomplete="off" required>
-				</div>
+    function toggleGiftMessage() {
+        if (checkbox.checked) {
+            giftMessageField.disabled = false;
+        } else {
+            giftMessageField.disabled = true;
+            giftMessageField.value = '';
+        }
+    }
 
-				<p class="header-prestations">Prestations</p>
+    // Initial state
+    toggleGiftMessage();
 
-				<div class="add-prestations-window">
-					<div class="tool-bar">
+    // Listen for changes
+    checkbox.addEventListener('change', toggleGiftMessage);
 
-						<select name="options" id="options">
-							<option value="option1">Option 1</option>
-							<option value="option2">Option 2</option>
-							<option value="option3">Option 3</option>
-							<option value="option4">Option 4</option>
+    const searchInput = document.getElementById('recherche');
+    const prestationsToAdd = document.querySelector('.prestations-to-add');
+    const prestations = Array.from(document.querySelectorAll('.header-prest'));
 
-						</select>
+    function filterPrestations() {
+        const searchTerm = searchInput.value.toLowerCase();
 
-						<input type="text" name="recherche" id="recherche" placeholder="Recherche" autocomplete="off">
+        prestations.forEach(prestation => {
+            const title = prestation.querySelector('.title').innerText.toLowerCase();
+            if (title.includes(searchTerm)) {
+                prestation.style.display = 'grid';
+            } else {
+                prestation.style.display = 'none';
+            }
+        });
+    }
 
-
-					</div>
-					<div class="prestations-to-add">
-
-
-						{% for prestation in prestations %}
-							<div class="header-prest">
-								<h3 class="title">{{ prestation.libelle }}</h3>
-								<p>€{{ prestation.tarif }}</p>
-
-								<div class="checkbox-wrapper-18">
-									<div class="round">
-										<input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.id %} checked {% endif %} {% endfor %} {% endif %}/>
-
-										<label for="checkbox-{{ loop.index }}"></label>
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-
-
-					</div>
-				</div>
-
-				<input type="hidden" name="csrf" value="{{ csrf }}">
-
-
-				<div class="field">
-					<input type="submit" class="btn" name="submit" value="Save" required>
-				</div>
-			</form>
-		</div>
-
-	</div>
-
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-const checkbox = document.getElementById('cb5');
-const giftMessageField = document.getElementById('message_kdo');
-const label = document.querySelector('.tgl-btn');
-
-function toggleGiftMessage() {
-if (checkbox.checked) {
-giftMessageField.disabled = false;
-} else {
-giftMessageField.disabled = true;
-giftMessageField.value = '';
-}
-}
-
-// Initial state
-toggleGiftMessage();
-
-// Listen for changes
-checkbox.addEventListener('change', toggleGiftMessage);
+    searchInput.addEventListener('input', filterPrestations);
 });
-	</script>
+
+function updatePrestations() {
+    const categoryId = document.getElementById('options').value;
+    const url = new URL(window.location.href);
+    url.searchParams.set('category_id', categoryId);
+    window.location.href = url.toString();
+}
+</script>
 {% endblock content %}
