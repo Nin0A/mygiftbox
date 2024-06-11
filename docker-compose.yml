@@ -1,6 +1,15 @@
-version: '3.8'
-
 services:
+  api:
+    image: canals/php:8.2
+    container_name: giftbox_api
+    volumes:
+      - ./gift.api/public:/var/www/html
+      - ./shared/img:/var/www/html/img
+      - ./gift.api/src:/var/www/src
+    ports:
+      - "10023:80"
+    depends_on:
+      - db
 
   db:
     image: mariadb:latest
@@ -25,7 +34,6 @@ services:
       - ./shared/img:/var/www/html/img
       - ./gift.appli/src:/var/www/src
     ports:
-
       - "10025:80"
     depends_on:
       - db
@@ -38,7 +46,7 @@ services:
 
 
       - "10127:8080"
-    command : php -S 0.0.0.0:8080 -t /var/www/html
+    command : php -S 0.0.0.0:8080 -t /var/www/html/
 
 volumes:
   db_data:

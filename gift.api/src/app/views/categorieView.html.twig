@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Catégorie{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="/css/categorie-view-page.css">
+
+    <h2 class="title">{{ categorie.libelle }}</h2>
+    <p class="introduction">{{ categorie.description }}</p>
+
+    <form method="get" class="form-select">
+        <select name="order" onchange="this.form.submit()" class="custom-select">
+            <option value="asc" {% if order == 'asc' %}selected{% endif %}>Croissant</option>
+            <option value="desc" {% if order == 'desc' %}selected{% endif %}>Décroissant</option>
+        </select>
+    </form>
+
+    <div class="grid-prestation">
+        {% for prestation in prestations %} 
+            <div>
+                <a href="{{ url_for('prestation', {}, { 'id': prestation.id }) }}">
+                    <img class="img-product" src="{{globals.img_dir}}/{{prestation.img}}">
+                </a>
+                <div class="header-prestation">
+                    <p>{{prestation.libelle}}</p>
+                    <p>€{{prestation.tarif}}</p>
+                </div>
+                <p class="description">{{prestation.description}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container-back">
+    <a class="back" href="{{ url_for('categories_list', {}, {}) }}"><p>Back to Categories</p></a>
+    </div>
+
+{% endblock %}

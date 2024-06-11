@@ -1,0 +1,103 @@
+.categories {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 2rem;
+    margin: 20px auto;
+    padding: 1% 10%;
+    position: relative;
+    justify-items: center;
+}
+
+.categorie-card {
+    border: 4px solid #0e172c;
+    padding: 4px;
+    border-radius: 8px;
+    text-decoration: none;
+    width: 70%;
+    background-color: #fff;
+    color: #0e172c;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.categorie-card:hover {
+    background-color: #0e172c;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.categorie-card:hover .title,
+.categorie-card:hover .desc {
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.title {
+    margin: 0px;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 2em;
+}
+
+.desc {
+    margin: 0px;
+}
+
+.introduction {
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 600;
+}
+
+.header-card {
+    padding-left: 12px;
+}
+
+img {
+    width: 5%;
+    height: auto;
+}
+
+
+.image-card {
+    position: absolute;
+    top: 87vh ;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    border-radius: 50%;
+}
+
+.sun-shine {
+    position: absolute;
+    width: 140px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotateSunShine 20s linear infinite;
+}
+
+.sun-image, .eye-image {
+    position: absolute;
+    width: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes rotateSunShine {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

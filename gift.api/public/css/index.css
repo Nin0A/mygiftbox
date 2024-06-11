@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'Synonyme'; /* Nom de la police */
+    src: url('../fonts/Synonym-Variable.ttf') format('truetype'); /* Chemin vers votre fichier de police */
+    /* Vous pouvez ajouter des variantes (italic, bold, etc.) ici si nécessaire */
+}
+
+*{
+    font-family: 'Synonyme', sans-serif;
+    color : #0e172c;
+
+}
+
+
+.nav-bar{
+
+
+    box-sizing: border-box;
+    padding: 0px 15px 0px 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fec7d7;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.navigation a {
+
+    color: #0e172c;
+    padding: 6px 15px;
+    border-radius: 20px;
+    margin: 0 10px;
+    font-size: 1.2em;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigation a:hover,
+.navigation a.active {
+    background-color: #0e172c;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+
+.sitename{
+    font-size: 1.6em;
+    display: flex;
+    flex-direction: row-reverse;
+    color :#0e172c;
+    margin: 8px;
+}
+
+.sitename img{
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+footer{
+    text-align: center;
+}
+
+.navigation a.active {
+}
+
+
+.account-img{
+    width: 40px;
+    height: auto;
+    background-color: transparent;
+    
+}
+
+.account{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 100px;    
+}
+
+.account > div {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.account > div > a{
+    text-decoration: none;
+}
+
+.account > div > a:hover{
+    text-decoration: underline;
+}
+
+.account-options {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding-left: 5px;
+    padding-bottom: 4px;
+    border-radius: 8px;
+}
+
+.account:hover .account-options {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.account-options a{
+    text-decoration: none;
+}
+
+.account-options a:hover{
+   text-decoration: underline;
+}

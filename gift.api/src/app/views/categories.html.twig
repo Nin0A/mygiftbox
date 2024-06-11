@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Catégories{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="/css/catalog-page.css">
+    <h2 class="main-title">List Of Categories</h2>
+    <h3 class="introduction ">Please select the category that interests you the most to start exploring our curated content and discover something new and exciting.</h3>
+    
+     <!-- Image Sun -->
+    <div class="image-card">
+        <img src="/img-css/sun-shine.svg" alt="Sun Shine" class="sun-shine">
+        <img src="/img-css/sun-corp.svg" alt="Sun" class="sun-image">
+        <img src="/img-css/eyes-and-mouth.svg" alt="Sun" class="eye-image">
+    </div>
+
+    <div class="categories">
+        {% for categorie in categories %}
+             
+
+            <a  class="categorie-card" href="{{ url_for('categorie_details', {'id': categorie.id}) }}">
+                <img src="/img-css/kawaii-soda.svg">
+                <div class="header-card">
+                    <h3 class="title">{{ categorie.libelle }}</h3>
+                    <p class="desc">{{ categorie.description }}</p>
+                </div>
+            </a>
+           
+
+        {% endfor %}
+    </div>
+
+    <script src="js/animated-eyes.js"></script>
+
+{% endblock %}

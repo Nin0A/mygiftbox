@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création de catégorie
+{% endblock %}
+
+{% block content %}
+
+	<link rel="stylesheet" href="/css/categorie-create.css">
+
+	<div style="background-color: {{ userIsLoggedIn ? 'green' : 'red' }}"class="container">
+		<div class="box form-box">
+			<header class="header-form">Login</header>
+
+			<form method="post">
+				<div class="field input">
+					<label for="email">Email</label>
+					<input type="email" name="email" id="email" autocomplete="off" required>
+				</div>
+
+				<div class="field input">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" autocomplete="off" required>
+				</div>
+
+				<input type="hidden" name="csrf" value="{{ csrf }}">
+
+
+				<div class="field">
+					<input type="submit" class="btn" name="submit" value="Validate" required>
+				</div>
+
+                <div class="links">
+                <a href="{{ url_for('account_register', {},) }}">Sign up for MyGiftBox</a>
+                </div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

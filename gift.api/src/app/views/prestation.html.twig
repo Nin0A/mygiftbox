@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la Prestation{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="/css/prestation-page.css">
+    <img class="img-product" src="{{globals.img_dir}}/{{prestation.img}}">
+    <h2>{{ prestation.libelle }}</h2>
+    <p>{{ prestation.description }}</p>
+    <p>{{ prestation.unite }}</p>
+    <a href="{{ url_for('categorie_details', {'id':prestation.cat_id}, {}) }}">Retour à la catégorie</a>
+
+{% endblock %}
