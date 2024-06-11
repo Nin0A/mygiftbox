@@ -47,7 +47,7 @@ return function (\Slim\App $app): \Slim\App {
 
     /**
      * POST /box/create pour la méthode post on affiche la catégorie correspondante au formulaire rempli
-     */
+     */ 
     $app->post('/box/create', PostBoxCreateAction::class);
 
 

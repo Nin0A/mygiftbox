@@ -41,37 +41,52 @@ class CoffretService implements CoffretInterface
      */
     public function createBox(array $values): void
     {
-     
-            // Vérification du token CSRF
-            CsrfService::check($values['csrf']);
-    
-            $montant=0;
+        // Vérification du token CSRF
+        CsrfService::check($values['csrf']);
 
-            // Création de la nouvelle boîte
-            $newBox = new Box();
-            $newBox->libelle = filter_var($values['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $newBox->description = filter_var($values['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $newBox->kdo = filter_var($values['kdo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $newBox->message_kdo = filter_var($values['message_kdo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $newBox->token = filter_var($values['token'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $newBox->created_at = date('Y-m-d H:i:s');
-            $newBox->updated_at = date('Y-m-d H:i:s');
+        $montant = 0;
+        $categories = [];
 
-            $newBox->save();
+        // Vérification que le nombre de prestations sélectionnées est d'au moins 2
+        if (count($values['prestations']) < 2) {
+            throw new CoffretServiceNotFoundException("Il faut sélectionner au moins 2 prestations.", 400);
+        }
 
-            foreach ($values['prestations'] as $prestationId) {
+        // Création de la nouvelle boîte
+        $newBox = new Box();
+        $newBox->libelle = filter_var($values['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newBox->description = filter_var($values['description'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newBox->kdo = filter_var($values['kdo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newBox->message_kdo = filter_var($values['message_kdo'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newBox->token = filter_var($values['token'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $newBox->created_at = date('Y-m-d H:i:s');
+        $newBox->updated_at = date('Y-m-d H:i:s');
+
+        // Sauvegarde initiale de la boîte
+        $newBox->save();
+
+        // Attacher les prestations et calculer le montant total
+        foreach ($values['prestations'] as $prestationId) {
+            $prestation = Prestation::find($prestationId);
+            if ($prestation) {
+                $categories[] = $prestation->cat_id;
                 $newBox->prestation()->attach($prestationId, ['quantite' => 1]);
-                $montant += Prestation::where('id', '=', $prestationId)->value('tarif');
+                $montant += $prestation->tarif;
             }
+        }
 
-            $newBox->montant = $montant;
-            $newBox->save();
+        // Vérification que les prestations proviennent de catégories différentes
+        if (count(array_unique($categories)) < 2) {
+            $newBox->prestation()->detach();
+            $newBox->delete();
+            throw new CoffretServiceNotFoundException("Il faut sélectionner des prestations de catégories différentes.", 400);
+        }
 
-
-
-
-        
+        // Mettre à jour le montant total et sauvegarder les modifications
+        $newBox->montant = $montant;
+        $newBox->save();
     }
+
 
 
     public function getBoxById(string $id): array
@@ -116,8 +131,19 @@ class CoffretService implements CoffretInterface
             // Vérification du token CSRF
             CsrfService::check($values['csrf']);
 
+            $montant = 0;
+            $categories = [];
+
+            // Vérification que le nombre de prestations sélectionnées est d'au moins 2
+            if (count($values['prestations']) < 2) {
+                throw new CoffretServiceNotFoundException("Il faut sélectionner au moins 2 prestations.", 400);
+            }
+
             // Recherche de la boîte par ID
             $box = Box::find($values['id']);
+            if (!$box) {
+                throw new ModelNotFoundException();
+            }
 
             // Mise à jour des propriétés de la boîte
             $box->libelle = filter_var($values['libelle'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -127,18 +153,27 @@ class CoffretService implements CoffretInterface
             $box->token = filter_var($values['token'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $box->updated_at = date('Y-m-d H:i:s');
 
-            // Mettre à jour les prestations et recalculer le montant
-            $montant = 0;
+            // Détacher les anciennes prestations
             $box->prestation()->detach();
 
+            // Attacher les nouvelles prestations et calculer le montant total
             foreach ($values['prestations'] as $prestationId) {
-                $box->prestation()->attach($prestationId, ['quantite' => 1]);
-                $montant += Prestation::where('id', '=', $prestationId)->value('tarif');
+                $prestation = Prestation::find($prestationId);
+                if ($prestation) {
+                    $categories[] = $prestation->cat_id;
+                    $box->prestation()->attach($prestationId, ['quantite' => 1]);
+                    $montant += $prestation->tarif;
+                }
             }
 
-            $box->montant = $montant;
+            // Vérification que les prestations proviennent de catégories différentes
+            if (count(array_unique($categories)) < 2) {
+                $box->prestation()->detach();
+                throw new CoffretServiceNotFoundException("Il faut sélectionner des prestations de catégories différentes.", 400);
+            }
 
-            // Sauvegarder les modifications
+            // Mettre à jour le montant total et sauvegarder les modifications
+            $box->montant = $montant;
             $box->save();
         } catch (ModelNotFoundException $e) {
             throw new CoffretServiceNotFoundException("La boîte spécifiée n'a pas été trouvée.", 404);
@@ -146,6 +181,7 @@ class CoffretService implements CoffretInterface
             throw new CoffretServiceNotFoundException("Erreur de base de données.", 500);
         }
     }
+
 
 }    
 
