@@ -78,7 +78,7 @@
     padding-top: 30px;
 }
 
-.connection-buttons button{
+.connection-buttons a{
     margin: 10px;
     padding: 10px 20px 10px 20px;
     font-weight: 600;
@@ -87,7 +87,7 @@
 }
 
 /* CSS */
-.connection-buttons button {
+.connection-buttons a {
   align-items: center;
   background-color: #fec7d7;
   border: 2.5px solid #0e172c;
@@ -115,7 +115,7 @@
     background-color: #fff;
   }
 
-.connection-buttons button:after {
+.connection-buttons a:after {
   background-color: #0e172c;
   border-radius: 8px;
   content: "";
@@ -130,11 +130,11 @@
   z-index: -1;
 }
 
-.connection-buttons button:hover:after {
+.connection-buttons a:hover:after {
   transform: translate(0, 0);
 }
 
-.connection-buttons button:active {
+.connection-buttons a:active {
   outline: 0;
 }
 
@@ -144,12 +144,12 @@
 
 }
 
-.connection-buttons button:hover {
+.connection-buttons a:hover {
   outline: 0;
 }
 
 @media (min-width: 768px) {
-    .connection-buttons button {
+    .connection-buttons a {
     padding: 0 40px;
   }
 }

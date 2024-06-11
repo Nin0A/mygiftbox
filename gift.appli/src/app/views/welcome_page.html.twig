@@ -12,8 +12,8 @@
 
 
     <div class="connection-buttons">
-        <button class="signin-button">Sign in</button>
-        <button class="login-button">Log in</button>
+        <a  href="{{ url_for('account_register', {},) }}" class="signin-button">Sign in</a>
+        <a href="{{ url_for('account_login', {},) }}" class="login-button">Log in</a>
     </div>
 
     <div class="card-grid">
