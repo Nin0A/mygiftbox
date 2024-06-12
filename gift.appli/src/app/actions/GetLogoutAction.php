@@ -10,23 +10,23 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 
 
-class GetRegisterAction extends AbstractAction{
+class GetLogoutAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
+
         try{
         //catalogue service
         $view = Twig::fromRequest($request);
 
-      
-        $error_message = $_SESSION['error_message'] ?? null;
-        unset($_SESSION['error_message']);
+        $authService = new AuthService();
 
+        $user=null;
 
+        if(AuthService::isAuthenticate()) $user=$_SESSION['USER'];
 
-        return $view->render($response, 'register.html.twig',
-                            ['error_message'=>$error_message,
-                            'userIsAuthenticate'=>AuthService::isAuthenticate(),
-                            'csrf'=> CsrfService::generate()]);
+        $authService->logout();
 
+        return $view->render($response, 'welcome_page.html.twig',[ 'user'=>$user,'userIsLoggedIn'=>AuthService::isAuthenticate(),'csrf'=> CsrfService::generate()]);
+    
         }catch(\Exception $e){
             return $view->render($response, 'error.html.twig',
             ['message_error'=>$e->getMessage(),

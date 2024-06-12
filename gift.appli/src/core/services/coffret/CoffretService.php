@@ -6,6 +6,7 @@ use gift\appli\core\domain\entities\Prestation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \gift\appli\app\utils\CsrfService;
 use \gift\appli\core\domain\entities\Box;
+use \gift\appli\core\domain\entities\User;
 use Illuminate\Database\QueryException;
 
 use \gift\appli\core\services\coffret\CoffretServiceNotFoundException;
@@ -35,6 +36,24 @@ class CoffretService implements CoffretInterface
        
     }
 
+    public function getBoxesByUser(string $email): array
+    {
+        try {
+
+            $user = User::where('user_id','=',$email)->first()->id;
+
+            $boxes = Box::where('createur_id','=',$user)->get();
+            
+
+            if (!$boxes) throw new ModelNotFoundException();
+
+            return $boxes->toArray();
+
+        } catch (ModelNotFoundException $e) {
+            throw new CoffretServiceNotFoundException("Erreur interne", 500);
+        }
+    }
+
 
     /**
      * values libelle , description montant,  bool kdo, message kdo
@@ -61,6 +80,7 @@ class CoffretService implements CoffretInterface
         $newBox->token = filter_var($values['token'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $newBox->created_at = date('Y-m-d H:i:s');
         $newBox->updated_at = date('Y-m-d H:i:s');
+        $newBox->createur_id = User::select('id')->where('user_id','=',$_SESSION['USER'])->first()->id;
 
         // Sauvegarde initiale de la boîte
         $newBox->save();

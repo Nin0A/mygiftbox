@@ -5,6 +5,7 @@ namespace gift\appli\app\actions;
 use gift\appli\core\services\auth\AuthService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Views\Twig;
 
 use Exception;
 
@@ -12,6 +13,10 @@ class PostLoginAction {
 
     
     public function __invoke(Request $request, Response $response, array $args): Response {
+
+        try{
+
+            $view = Twig::fromRequest($request);
         // Récupérer les données du formulaire
         $data = $request->getParsedBody();
 
@@ -31,6 +36,11 @@ class PostLoginAction {
         
 
         // Rediriger vers la liste des catégories après la création
-        return $response->withHeader('Location', '/account/login')->withStatus(302);
+        return $response->withHeader('Location', '/')->withStatus(302);
+    } catch(Exception $e){
+        return $view->render($response, 'error.html.twig',
+        ['message_error'=>$e->getMessage(),
+        'code_error'=>$e->getCode()]);
+    }
     }
 }

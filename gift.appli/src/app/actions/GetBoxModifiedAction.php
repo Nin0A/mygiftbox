@@ -9,6 +9,8 @@ use Slim\Views\Twig;
 use gift\appli\core\services\coffret\CoffretService;
 use gift\appli\core\services\catalogue\CatalogueService;
 use gift\appli\app\utils\CsrfService;
+use gift\appli\core\services\auth\AuthService;
+
 
 
 class GetBoxModifiedAction extends AbstractAction{
@@ -18,9 +20,10 @@ class GetBoxModifiedAction extends AbstractAction{
 
         $coffretService = new CoffretService();
 
-       
-
         try {
+            $user=null;
+            if(isset($_SESSION['USER']))
+                $user=$_SESSION['USER'];
             $view = Twig::fromRequest($request);
 
 
@@ -31,7 +34,9 @@ class GetBoxModifiedAction extends AbstractAction{
 
                 return $view->render($response, 'get_box_create.html.twig',
                                     ['prestations' => $catalogueService->getPrestations(),
-                                    'coffrets' => $coffretService->getBoxes(),
+                                    'coffrets' => $coffretService->getBoxesByUser($user),
+                                    'user'=>$user,
+                                    'userIsLoggedIn'=>AuthService::isAuthenticate(),
                                     'csrf'=> CsrfService::generate(),
                                     'currentCoffret'=>$coffretService->getBoxById($args['id']),
                                     'currentPrestations'=>$coffretService->getPrestationsByBoxId($args['id'])]);
@@ -40,11 +45,13 @@ class GetBoxModifiedAction extends AbstractAction{
             }
 
            
-        }catch (\Exception $e){
-            throw new \Exception("test ".$e);
+        }catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
         }
 
        
-        return $view->render($response, 'get_box_create.html.twig',['prestations' => $catalogueService->getPrestations(), 'coffrets' => $coffretService->getBoxes(),'csrf'=> CsrfService::generate()]);
+        return $view->render($response, 'get_box_create.html.twig',[ 'user'=>$user,'userIsLoggedIn'=>AuthService::isAuthenticate(),'prestations' => $catalogueService->getPrestations(), 'coffrets' => $coffretService->getBoxes(),'csrf'=> CsrfService::generate()]);
     }
 }

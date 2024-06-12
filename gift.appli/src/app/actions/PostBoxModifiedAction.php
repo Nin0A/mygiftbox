@@ -11,7 +11,7 @@ class PostBoxModifiedAction extends AbstractAction
 {
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-
+        try{
         $data = $request->getParsedBody();
 
         if (isset($data['submit']) && $data['submit'] === 'Save') {
@@ -51,6 +51,11 @@ class PostBoxModifiedAction extends AbstractAction
 
             return $response->withHeader('Location', '/box/modified/'.$args['id'])->withStatus(302);
         }
+    }catch(\Exception $e){
+       
+        return $response->withHeader('Location', '/box/modified/'.$args['id'])->withStatus(302);
+        
+    }
     }
 }
 

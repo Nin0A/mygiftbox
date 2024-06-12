@@ -19,6 +19,6 @@ class User extends \Illuminate\Database\Eloquent\Model
      * Association vers Box 
      */
     public function box() {
-        return $this->hasMany('gift\appli\core\domain\entities\User', 'id');
+        return $this->hasMany('gift\appli\core\domain\entities\Box', 'id');
     } 
 }

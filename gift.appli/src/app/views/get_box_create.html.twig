@@ -7,6 +7,11 @@
 
 <div class="parts">
     <div class="gift-list">
+        <a href="{{ url_for('box_creation', {}, { }) }}">
+                <div class="gift-create-button">
+                    <h3 class="coffret_libelle">Add new box</h3>
+                </div>
+            </a>
         {% for coffret in coffrets %}
             <a href="{{ url_for('box_modified', {'id':coffret.id}, { }) }}">
                 <div class="gift-item">
@@ -19,6 +24,10 @@
 
     <div class="gift">
         <img src="/img-css/full-gift.svg">
+        {% if currentCoffret is defined %}
+            <p>€{{currentCoffret.montant}}</p>
+        {% endif %}
+
     </div>
 
     <div class="box form-box">
