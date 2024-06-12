@@ -73,12 +73,12 @@
                 </div>
                 <div class="prestations-to-add">
                     {% for prestation in prestations %}
-                        <div class="header-prest">
-                            <h3 class="title">{{ prestation.libelle }}</h3>
-                            <p>€{{ prestation.tarif }}</p>
+                        <div style="background-color:{{ prestation.color_id }};" class="header-prest">
+                            <h3 class="title">{{ prestation.presta.libelle }}</h3>
+                            <p>€{{ prestation.presta.tarif }}</p>
                             <div class="checkbox-wrapper-18">
                                 <div class="round">
-                                    <input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.id %} checked {% endif %} {% endfor %} {% endif %}/>
+                                    <input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.presta.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.id %} checked {% endif %} {% endfor %} {% endif %}/>
                                     <label for="checkbox-{{ loop.index }}"></label>
                                 </div>
                             </div>

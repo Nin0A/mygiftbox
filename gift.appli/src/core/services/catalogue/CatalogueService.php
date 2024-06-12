@@ -46,9 +46,52 @@ class CatalogueService implements CatalogueInterface
         } catch (ModelNotFoundException $e) {
             throw new CatalogueServiceNotFoundException("Erreur interne", 500);
         }
-
-       
     }
+
+
+    public function getPrestationsWithCategorie(): array
+    {
+        try {
+
+            $res=[];
+
+            $categorie = Categorie::all();
+
+
+            foreach($categorie as $c)
+            {
+                $prestations = Prestation::where('cat_id','=',$c->id)->get();
+
+                foreach($prestations as $p)
+                {
+                    array_push($res,['presta'=>$p->toArray(),'color_id'=>$this->intToCssColor($c->id)]);
+                }   
+            }
+            return $res;
+
+        } catch (ModelNotFoundException $e) {
+            throw new CatalogueServiceNotFoundException("Erreur interne", 500);
+        }
+    }
+
+    function intToCssColor(int $number): string
+{
+    // Generate colors by creating distinct large intervals for RGB components
+    $r = ($number * 37) % 256;
+    $g = ($number * 67) % 256;
+    $b = ($number * 97) % 256;
+
+    // Ensure the colors are light by adding a base value if necessary
+    $r = min(255, $r + 128);
+    $g = min(255, $g + 128);
+    $b = min(255, $b + 128);
+
+    // Convert back to hex color code
+    $colorCode = sprintf('%02x%02x%02x', $r, $g, $b);
+
+    // Return the CSS color code
+    return '#' . $colorCode;
+}
 
     /**
      * 

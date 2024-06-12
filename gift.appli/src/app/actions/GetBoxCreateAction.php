@@ -33,7 +33,7 @@ class GetBoxCreateAction extends AbstractAction{
       
         return $view->render($response, 'get_box_create.html.twig',
         ['userIsLoggedIn'=>AuthService::isAuthenticate(),
-        'prestations' => $catalogueService->getPrestations(),
+        'prestations' => $catalogueService->getPrestationsWithCategorie(),
         'user'=>$user,
         'coffrets' => $coffretService->getBoxesByUser($_SESSION['USER']),
         'csrf'=> CsrfService::generate()]);
