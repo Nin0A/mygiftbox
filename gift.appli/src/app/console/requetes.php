@@ -8,9 +8,9 @@
     /**
      * use
      */
-    use gift\appli\models\Box;
-    use gift\appli\models\Categorie;
-    use gift\appli\models\Prestation;
+    use gift\appli\core\domain\entities\Box;
+    use gift\appli\core\domain\entities\Categorie;
+    use gift\appli\core\domain\entities\Prestation;
 
     use Illuminate\Database\Capsule\Manager as DB;
 
