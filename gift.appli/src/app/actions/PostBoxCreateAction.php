@@ -14,6 +14,8 @@ class PostBoxCreateAction extends AbstractAction
     public function __invoke(Request $request, Response $response, array $args): Response
     {
 
+        try{
+
         $data = $request->getParsedBody();
 
         if (isset($data['submit']) && $data['submit'] === 'Save') {
@@ -50,5 +52,8 @@ class PostBoxCreateAction extends AbstractAction
 
             return $response->withHeader('Location', '/box/create')->withStatus(302);
         }
+    }catch(\Exception $e){
+        return $response->withHeader('Location', '/box/create')->withStatus(302);
+    }
     }
 }

@@ -13,6 +13,7 @@ use Slim\Views\Twig;
 class GetLogoutAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
 
+        try{
         //catalogue service
         $view = Twig::fromRequest($request);
 
@@ -25,5 +26,11 @@ class GetLogoutAction extends AbstractAction{
         $authService->logout();
 
         return $view->render($response, 'welcome_page.html.twig',[ 'user'=>$user,'userIsLoggedIn'=>AuthService::isAuthenticate(),'csrf'=> CsrfService::generate()]);
+    
+        }catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
+        }
     }
 }

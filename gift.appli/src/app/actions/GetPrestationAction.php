@@ -39,8 +39,10 @@ class GetPrestationAction extends AbstractAction
             else
                 throw new HttpBadRequestException($request, "ID de la prestation non defini");
 
-        } catch (CatalogueServiceNotFoundException $e) {
-            throw new HttpNotFoundException($request, "La prestation n'existe pas");
+        } catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
         }
     }
 }

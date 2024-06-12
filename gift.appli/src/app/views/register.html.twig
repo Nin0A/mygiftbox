@@ -38,6 +38,7 @@
                 <div class="links">
                 <a href="{{ url_for('account_login', {},) }}">Login here!</a>
                 </div>
+				<p class="error_message">{% if error_message is defined %} {{error_message}} {% endif %}</p>
 			</form>
 		</div>
 	</div>

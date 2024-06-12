@@ -20,8 +20,6 @@ class GetBoxModifiedAction extends AbstractAction{
 
         $coffretService = new CoffretService();
 
-       
-
         try {
             $user=null;
             if(isset($_SESSION['USER']))
@@ -47,8 +45,10 @@ class GetBoxModifiedAction extends AbstractAction{
             }
 
            
-        }catch (\Exception $e){
-            throw new \Exception("test ".$e);
+        }catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
         }
 
        

@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use gift\appli\app\actions\GetCategorieIdAction;
+use gift\appli\app\actions\GetErrorAction;
 use gift\appli\app\actions\GetLoginAction;
 use gift\appli\app\actions\GetLogoutAction;
 use gift\appli\app\actions\PostLoginAction;
@@ -87,9 +88,14 @@ return function (\Slim\App $app): \Slim\App {
 
     $app->get('/account/register', GetRegisterAction::class)->setName('account_register');
 
+    $app->get('/account/register/{error_message}',GetRegisterAction::class);
+
     $app->post('/account/register', PostRegisterAction::class);
 
     $app->get('/account/logout', GetLogoutAction::class)->setName('account_logout');
+
+    $app->get('/error', GetErrorAction::class)->setName('error');
+
 
 
 

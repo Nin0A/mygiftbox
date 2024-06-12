@@ -98,7 +98,7 @@ class AuthService implements AuthInterface
             }
          }
       } catch (Exception $e) {
-         throw new Exception($e->getMessage());
+         throw new AuthServiceBadDataException('User already exist !',111);
       }
    }
 

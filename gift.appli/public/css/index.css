@@ -124,3 +124,10 @@ footer{
 .account-options a:hover{
    text-decoration: underline;
 }
+
+
+.error_message{
+    color: red;
+    text-align: center;
+    font-weight: 600;
+}

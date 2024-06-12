@@ -12,11 +12,25 @@ use Slim\Views\Twig;
 
 class GetRegisterAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
-
+        try{
         //catalogue service
         $view = Twig::fromRequest($request);
+
+      
+        $error_message = $_SESSION['error_message'] ?? null;
+        unset($_SESSION['error_message']);
+
+
+
         return $view->render($response, 'register.html.twig',
-                            ['userIsAuthenticate'=>AuthService::isAuthenticate(),
+                            ['error_message'=>$error_message,
+                            'userIsAuthenticate'=>AuthService::isAuthenticate(),
                             'csrf'=> CsrfService::generate()]);
+
+        }catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
+        }
     }
 }

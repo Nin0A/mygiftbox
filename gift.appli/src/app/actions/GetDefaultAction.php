@@ -12,6 +12,8 @@ use gift\appli\core\services\auth\AuthService;
 
 class GetDefaultAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
+
+        try{
         //Route par défaut
         $view = Twig::fromRequest($request);
 
@@ -23,5 +25,10 @@ class GetDefaultAction extends AbstractAction{
         return $view->render($response, 'welcome_page.html.twig',[
             'user'=>$user,
             'userIsLoggedIn'=>AuthService::isAuthenticate()]);
+        }catch(\Exception $e){
+                return $view->render($response, 'error.html.twig',
+                ['message_error'=>$e->getMessage(),
+                'code_error'=>$e->getCode()]);
+            }
     }
 }

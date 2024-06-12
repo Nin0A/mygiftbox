@@ -13,7 +13,7 @@ use gift\appli\core\services\auth\AuthService;
 
 class GetCategorieCreateAction extends AbstractAction{
     public function __invoke(Request $request, Response $response, array $args): Response{
-
+        try{
         //catalogue service
         $view = Twig::fromRequest($request);
 
@@ -25,5 +25,10 @@ class GetCategorieCreateAction extends AbstractAction{
             'userIsLoggedIn'=>AuthService::isAuthenticate(),
             'user'=>$user,
             'csrf'=> CsrfService::generate()]);
+        }catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
+        }
     }
 }

@@ -49,8 +49,10 @@ class GetCategorieIdAction extends AbstractAction
                 'categories' => $catalogueService->getCategories()]);
 
             }
-        } catch (CatalogueServiceNotFoundException $e) {
-            throw new CatalogueServiceNotFoundException('Problème de bdd');
+        } catch(\Exception $e){
+            return $view->render($response, 'error.html.twig',
+            ['message_error'=>$e->getMessage(),
+            'code_error'=>$e->getCode()]);
         }
     }
 }
