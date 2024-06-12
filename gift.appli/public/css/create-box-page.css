@@ -472,3 +472,24 @@ a{
   color: rgb(255, 255, 255);
   margin: 4px;
 }
+
+.error_message_prestations{
+  color:red;
+  text-align: center;
+
+}
+
+.les_buttons{
+  display:flex;
+  justify-content: space-between;
+  
+}
+
+#pay{
+  background-color: rgb(255, 108, 108);
+}
+
+.les_buttons input{
+ width:45%;
+  
+}

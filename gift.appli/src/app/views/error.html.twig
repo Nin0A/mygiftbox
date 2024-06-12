@@ -1,10 +1,15 @@
-{% block title %}Error
-{% endblock %}
+{% block title %}{% endblock %}
 
 {% block content %}
 
-<h2>{{code_error}}</h2>
-<h3>{{message_error}}</h3>
+	<link rel="stylesheet" href="/css/error-page.css">
+	<div>
+		<h2>{{code_error}}</h2>
+		<h3>{{message_error}}</h3>
+		<a href="/">Back home</a>
+	</div>
+
+	
 
 
 {% endblock %}

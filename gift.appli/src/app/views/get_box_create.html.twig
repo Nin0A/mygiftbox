@@ -78,7 +78,7 @@
                             <p>€{{ prestation.presta.tarif }}</p>
                             <div class="checkbox-wrapper-18">
                                 <div class="round">
-                                    <input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.presta.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.id %} checked {% endif %} {% endfor %} {% endif %}/>
+                                    <input type="checkbox" id="checkbox-{{ loop.index }}" name="prestations[]" value="{{ prestation.presta.id }}" {% if currentCoffret is defined %} {% for currentPrestation in currentPrestations %} {% if currentPrestation==prestation.presta.id %} checked {% endif %} {% endfor %} {% endif %}/>
                                     <label for="checkbox-{{ loop.index }}"></label>
                                 </div>
                             </div>
@@ -90,8 +90,14 @@
             <input type="hidden" name="csrf" value="{{ csrf }}">
 
             <div class="field">
-                <input type="submit" class="btn" name="submit" value="Save" required>
+                <div class="les_buttons">
+                    <input type="submit" class="btn" name="submit" value="Save" required>
+                    {% if currentCoffret is defined %}
+                        <input type="submit" class="btn" id="pay" name="submit" value="Pay" required>
+                    {% endif %}
+                </div>
             </div>
+             <p class="error_message_prestations">{% if error_message is defined %}{{error_message}}{% endif %}</p>
         </form>
     </div>
 </div>

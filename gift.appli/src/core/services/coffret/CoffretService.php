@@ -10,6 +10,8 @@ use \gift\appli\core\domain\entities\User;
 use Illuminate\Database\QueryException;
 
 use \gift\appli\core\services\coffret\CoffretServiceNotFoundException;
+use \gift\appli\core\services\coffret\CoffretServiceNotEnoughDataException;
+
 
 
 
@@ -68,7 +70,7 @@ class CoffretService implements CoffretInterface
 
         // Vérification que le nombre de prestations sélectionnées est d'au moins 2
         if (count($values['prestations']) < 2) {
-            throw new CoffretServiceNotFoundException("Il faut sélectionner au moins 2 prestations.", 400);
+            throw new CoffretServiceNotEnoughDataException("You need to select 2 prestations min", 400);
         }
 
         // Création de la nouvelle boîte
@@ -156,7 +158,7 @@ class CoffretService implements CoffretInterface
 
             // Vérification que le nombre de prestations sélectionnées est d'au moins 2
             if (count($values['prestations']) < 2) {
-                throw new CoffretServiceNotFoundException("Il faut sélectionner au moins 2 prestations.", 400);
+                throw new CoffretServiceNotEnoughDataException("Il faut sélectionner au moins 2 prestations.", 400);
             }
 
             // Recherche de la boîte par ID

@@ -13,45 +13,63 @@ use gift\appli\core\services\auth\AuthService;
 
 
 
-class GetBoxModifiedAction extends AbstractAction{
-    public function __invoke(Request $request, Response $response, array $args): Response{
-
+class GetBoxModifiedAction extends AbstractAction
+{
+    public function __invoke(Request $request, Response $response, array $args): Response
+    {
         $catalogueService = new CatalogueService();
 
         $coffretService = new CoffretService();
+        
+        try{
+        
+            $user = null;
+            if (isset($_SESSION['USER']))
+                $user = $_SESSION['USER'];
 
-        try {
-            $user=null;
-            if(isset($_SESSION['USER']))
-                $user=$_SESSION['USER'];
+            $error_message = $_SESSION['error_message'] ?? null;
+            unset($_SESSION['error_message']);
+
+            
+
             $view = Twig::fromRequest($request);
 
 
             if (isset($args['id'])) {
-                
 
                 $coffretService->getBoxById($args['id']);
 
-                return $view->render($response, 'get_box_create.html.twig',
-                                    ['prestations' => $catalogueService->getPrestations(),
-                                    'coffrets' => $coffretService->getBoxesByUser($user),
-                                    'user'=>$user,
-                                    'userIsLoggedIn'=>AuthService::isAuthenticate(),
-                                    'csrf'=> CsrfService::generate(),
-                                    'currentCoffret'=>$coffretService->getBoxById($args['id']),
-                                    'currentPrestations'=>$coffretService->getPrestationsByBoxId($args['id'])]);
-           
-
+                return $view->render(
+                    $response,
+                    'get_box_create.html.twig',
+                    [
+                        'prestations' => $catalogueService->getPrestationsWithCategorie(),
+                        'coffrets' => $coffretService->getBoxesByUser($user),
+                        'user' => $user,
+                        'error_message' => $error_message,
+                        'userIsLoggedIn' => AuthService::isAuthenticate(),
+                        'csrf' => CsrfService::generate(),
+                        'currentCoffret' => $coffretService->getBoxById($args['id']),
+                        'currentPrestations' => $coffretService->getPrestationsByBoxId($args['id'])
+                    ]
+                );
             }
 
-           
+
         }catch(\Exception $e){
             return $view->render($response, 'error.html.twig',
             ['message_error'=>$e->getMessage(),
             'code_error'=>$e->getCode()]);
         }
 
-       
-        return $view->render($response, 'get_box_create.html.twig',[ 'user'=>$user,'userIsLoggedIn'=>AuthService::isAuthenticate(),'prestations' => $catalogueService->getPrestations(), 'coffrets' => $coffretService->getBoxes(),'csrf'=> CsrfService::generate()]);
+
+        return $view->render($response, 'get_box_create.html.twig',
+        ['userIsLoggedIn'=>AuthService::isAuthenticate(),
+        'prestations' => $catalogueService->getPrestationsWithCategorie(),
+        'error_message'=> $error_message,
+        'user'=>$user,
+        'message_error',
+        'coffrets' => $coffretService->getBoxesByUser($_SESSION['USER']),
+        'csrf'=> CsrfService::generate()]);
     }
 }

@@ -6,6 +6,7 @@ use gift\appli\app\actions\AbstractAction;
 
 use gift\appli\core\services\coffret\CoffretService;
 
+use gift\appli\core\services\coffret\CoffretServiceNotEnoughDataException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -52,7 +53,12 @@ class PostBoxCreateAction extends AbstractAction
 
             return $response->withHeader('Location', '/box/create')->withStatus(302);
         }
-    }catch(\Exception $e){
+    }catch(CoffretServiceNotEnoughDataException $e){
+        $_SESSION['error_message']=$e->getMessage();
+        return $response->withHeader('Location', '/box/create')->withStatus(302);
+    }
+    
+    catch(\Exception $e){
         return $response->withHeader('Location', '/box/create')->withStatus(302);
     }
     }
