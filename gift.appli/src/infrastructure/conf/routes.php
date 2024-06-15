@@ -16,6 +16,9 @@ use gift\appli\app\actions\GetBoxModifiedAction;
 use gift\appli\app\actions\PostBoxModifiedAction;
 use gift\appli\app\actions\GetRegisterAction;
 use gift\appli\app\actions\PostRegisterAction;
+use gift\appli\app\actions\GetBuyAction;
+use gift\appli\app\actions\PostBuyAction;
+
 
 
 
@@ -95,6 +98,12 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/account/logout', GetLogoutAction::class)->setName('account_logout');
 
     $app->get('/error', GetErrorAction::class)->setName('error');
+
+    $app->get('/payment', GetBuyAction::class)->setName('get_payment');
+
+    $app->get('/payment/{id}', GetBuyAction::class)->setName('get_paymentBox');
+
+    $app->post('/payment/{id}', PostBuyAction::class)->setName('post_payment');
 
 
 

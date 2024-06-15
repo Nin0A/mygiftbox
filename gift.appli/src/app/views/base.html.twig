@@ -22,8 +22,7 @@
             <a href="#" class="account-link"> {% if userIsLoggedIn is defined and userIsLoggedIn %}{{user}}{% else %}Account{% endif %}</a>
             <div class="account-options">
                 {% if userIsLoggedIn is defined and userIsLoggedIn %}
-                        <a href="">Shopping Cart</a>
-
+                    <a href="{{ url_for('get_payment', {},) }}">Shopping Cart</a>
                     <a href="{{ url_for('account_logout', {},) }}">Logout</a>
                 {% else %}
                     <a href="{{ url_for('account_login', {},) }}">Login</a>

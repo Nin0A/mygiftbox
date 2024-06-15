@@ -205,6 +205,33 @@ class CoffretService implements CoffretInterface
     }
 
 
+    /**
+     * Met à jour le statut de la boîte spécifiée par son ID.
+     *
+     * @param string $id ID de la boîte à mettre à jour
+     * @param int $newStatus Nouveau statut de la boîte
+     * @throws CoffretServiceNotFoundException Si la boîte spécifiée n'est pas trouvée
+     */
+    public function updateBoxStatus(string $id, int $newStatus): void
+    {
+        try {
+            // Recherche de la boîte par ID
+            $box = Box::find($id);
+            if (!$box) {
+                throw new ModelNotFoundException();
+            }
+
+            // Mise à jour du statut de la boîte
+            $box->statut = $newStatus;
+            $box->save();
+        } catch (ModelNotFoundException $e) {
+            throw new CoffretServiceNotFoundException("La boîte spécifiée n'a pas été trouvée.", 404);
+        } catch (QueryException $e) {
+            throw new CoffretServiceNotFoundException("Erreur de base de données lors de la mise à jour du statut de la boîte.", 500);
+        }
+    }
+
+
 }    
 
 
