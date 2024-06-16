@@ -67,15 +67,15 @@
 | Validation d'un coffret                                  | Nino/Dimitri                        | Fonctionnel ✅ |
 | Paiement d'un coffret                                    | Dimitri                             | Fonctionnel ✅ |
 | Modification d'un coffret : suppression de prestations   | Nino                                | Fonctionnel ✅ |
-| Modification d'un coffret : modification des quantités   | /                                   | Fonctionnel ✅ |
+| Modification d'un coffret : modification des quantités   | /                                   | Non réalisée ❌ |
 | Génération de l'URL d'accès                              | Dimitri                             | Fonctionnel ✅ |
 | Accès au coffret                                         | Nino                                | Fonctionnel ✅ |
 | Signin                                                   | Nino                                | Fonctionnel ✅ |
 | Register                                                 | Nino                                | Fonctionnel ✅ |
 | Accéder à ses coffrets                                   | Nino                                | Fonctionnel ✅ |
 | Afficher les box prédéfinies                             | Nino                                | Fonctionnel ✅ |
-| Créer un coffret prérempli à partir d'une box            | /                                   | / |
-| Créer un coffret prérempli à partir d'une box affichée   | /                                   | / |
+| Créer un coffret prérempli à partir d'une box            | /                                   | Non réalisée ❌ |
+| Créer un coffret prérempli à partir d'une box affichée   | /                                   | Non réalisée ❌ |
 | API : liste des prestations                              | Dimitri                             | Fonctionnel ✅ |
 | API : liste des catégories                               | Dimitri                             | Fonctionnel ✅ |
 | API : liste des prestations d'une catégorie              | Dimitri                             | Fonctionnel ✅ |
