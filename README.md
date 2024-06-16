@@ -60,7 +60,7 @@
 | 2.Afficher le détail d'une prestation                      | Nino                                | Fonctionnel ✅ |
 | 3.Liste de prestations par catégories                      | Nino                                | Fonctionnel ✅ |
 | 4.Liste de catégories                                      | Nino                                | Fonctionnel ✅ |
-|<mark> 5.Tri par prix                                             | Dimitri                             | Fonctionnel ✅</mark> |
+|<span style="background-color: yellow;">5.Tri par prix</span> | Dimitri                             | Fonctionnel ✅</mark> |
 | 6.Création d'un coffret vide                               | Nino                                | Fonctionnel ✅ |
 | 7.Ajout de prestations dans le coffret                     | Nino                                | Fonctionnel ✅ |
 | 8.Affichage d'un coffret                                   | Nino                                | Fonctionnel ✅ |
