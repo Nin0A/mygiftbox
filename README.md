@@ -83,6 +83,11 @@
 
 ⭐️ = BONUS
 
+## Installation du projet :
+
+Pour installer le ce projet il suffit de cloner celui-ci :
+
+    git clone 
 
 ## Remarques générales :
 
