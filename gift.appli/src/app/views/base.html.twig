@@ -12,9 +12,8 @@
     <nav class="navigation">
         <a href="/">Home</a>
         <a href="{{ url_for('categories_list', {},) }}">Catalog</a>
-        <a href="">Our Products</a>
+        <a href="{{ url_for('box_predefined', {}, {}) }}">Our Products</a>
           {% if userIsLoggedIn is defined and userIsLoggedIn %}<a href="{{ url_for('box_creation', {},) }}">My boxes</a> {% endif %}
-        <a href="">About Us</a>
     </nav>
     <div class="account">
         <img class="account-img" src="/img-css/account.svg">

@@ -26,17 +26,17 @@ class PostCategorieCreateAction {
         // Créer une nouvelle catégorie
         try {
             $catalogueService->createCategorie($values);
-        } catch (Exception\CatalogueServiceInvalidDataException $e) {
-            // Gérer l'erreur, par exemple en redirigeant avec un message d'erreur
-            return $response->withHeader('Location', '/categorie/create'.urlencode($e->getMessage()))
-                            ->withStatus(500);
-        }
-        catch(Exception\CatalogueServiceNoDataFoundException $e){
-            return $response->withHeader('Location', '/categorie/create'.urlencode($e->getMessage()))
-                            ->withStatus(500);
-        }
 
-        // Rediriger vers la liste des catégories après la création
-        return $response->withHeader('Location', '/categories')->withStatus(302);
+            // Rediriger vers la liste des catégories après la création
+            return $response->withHeader('Location', '/categories')->withStatus(302);
+        } catch (Exception\CatalogueServiceInvalidDataException | Exception\CatalogueServiceNoDataFoundException $e) {
+            // Gérer l'erreur, par exemple en redirigeant avec un message d'erreur
+            $errorMessage = urlencode($e->getMessage());
+            return $response->withHeader('Location', "/categorie/create?error=$errorMessage")->withStatus(500);
+        } catch (\Exception $e) {
+            // Gérer d'autres exceptions non prévues
+            $errorMessage = urlencode($e->getMessage());
+            return $response->withHeader('Location', "/categorie/create?error=$errorMessage")->withStatus(500);
+        }
     }
 }

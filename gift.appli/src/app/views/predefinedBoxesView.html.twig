@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Predefined Boxes
+{% endblock %}
+
+{% block content %}
+	<link rel="stylesheet" href="/css/predefined-boxes-view-page.css">
+    <h2 class="title">List of Predefined Boxes</h2>
+	<p class="introduction">You will find our boxes already designed for you, made with love for a unique and unforgettable experience</p>
+
+	<div class="grid-prestation">
+		{% for boxe in predefined_boxes %}
+			<div class="cube">
+				<img class="img-product" src="/img-css/full-gift.svg">
+				<div class="box-product">
+					<div class="header-prestation">
+						<p>{{boxe.libelle | upper }}</p>
+						<p>€{{boxe.montant}}</p>
+					</div>
+					<p class="description">{{boxe.description}}</p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="container-back">
+		<a class="back" href="/">
+			<p>Back to Categories</p>
+		</a>
+	</div>
+
+{% endblock %}

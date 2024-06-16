@@ -21,7 +21,7 @@
             <a  class="categorie-card" href="{{ url_for('categorie_details', {'id': categorie.id}) }}">
                 <img src="/img-css/kawaii-soda.svg">
                 <div class="header-card">
-                    <h3 class="title">{{ categorie.libelle }}</h3>
+                    <h3 class="title">{{ categorie.libelle | upper }}</h3>
                     <p class="desc">{{ categorie.description }}</p>
                 </div>
             </a>
