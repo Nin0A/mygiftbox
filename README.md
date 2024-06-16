@@ -83,11 +83,46 @@
 
 ⭐️ = BONUS
 
-## Installation du projet :
+Voici une version plus propre de vos instructions d'installation :
 
-Pour installer le ce projet il suffit de cloner celui-ci :
+## Installation du projet
 
-    git clone 
+Pour installer ce projet, suivez les étapes ci-dessous :
+
+1. **Cloner le projet :**
+
+    ```bash
+    git clone git@github.com:Nin0A/mygiftbox.git
+    ```
+
+2. **Ajouter un fichier `.env` à la racine du projet avec les champs suivants :**
+
+    ```plaintext
+    MYSQL_ROOT_PASSWORD=mdp
+    MYSQL_DATABASE=mygiftbox
+    MYSQL_USER=user
+    MYSQL_PASSWORD=mdp
+    ```
+
+3. **Ajouter un fichier `.htaccess` dans `gift.appli/public/` :**
+
+    ```apache
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [QSA,L]
+    ```
+
+4. **Lancer `docker-compose.yml` qui se trouve à la racine du projet :**
+
+    ```bash
+    docker compose up -d
+    ```
+
+5. **Accéder à Adminer sur le port **10127** du localhost, créer une table `mygiftbox` et insérer le jeu de données qui se trouve dans `init.sql`.**
+
+Et voilà, votre projet est maintenant fonctionnel.
 
 ## Remarques générales :
 
