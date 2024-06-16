@@ -122,7 +122,7 @@ Pour installer ce projet, suivez les étapes ci-dessous :
 
 5. **Accéder à Adminer sur le port **10127** du localhost, créer une table `mygiftbox` et insérer le jeu de données qui se trouve dans `init.sql`.**
 
-Et voilà, votre projet est maintenant fonctionnel.
+Le projet est maintenant fonctionnel et accessible. Accès au projet **http://localhost:10025**
 
 ## Remarques générales :
 
