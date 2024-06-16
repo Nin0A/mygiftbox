@@ -70,10 +70,11 @@
         <div class="checkbox-section">
             <p class="header-checkbox">It is a gift ?</p>
             <div class="checkbox-wrapper-10">
-                <input class="tgl tgl-flip" id="cb5" type="checkbox" name="kdo" {% if currentCoffret is defined and currentCoffret.kdo == 1 %} checked {% endif %}/>
+                <input class="tgl tgl-flip" id="cb5" type="checkbox" name="kdo" {% if currentCoffret is defined and currentCoffret.kdo == 1 %} checked {% endif %} disabled />
                 <label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="cb5"></label>
             </div>
         </div>
+
     </div>
 </div>
 

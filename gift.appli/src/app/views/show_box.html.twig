@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contenu du Coffret{% endblock %}
+
+{% block content %}
+    <div class="coffret-details">
+        <h1>{{ coffret.libelle }}</h1>
+        <p>Description : {{ coffret.description }}</p>
+        <p>Montant : €{{ coffret.montant }}</p>
+        <p>Message cadeau : {{ coffret.message_kdo }}</p>
+
+        <h2>Prestations incluses</h2>
+        <ul>
+            {% for prestation in coffret.prestation %}
+                <li>{{ prestation.libelle }} - €{{ prestation.tarif }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

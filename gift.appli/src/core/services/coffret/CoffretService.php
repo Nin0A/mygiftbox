@@ -231,6 +231,15 @@ class CoffretService implements CoffretInterface
         }
     }
 
+    public function getBoxByToken(string $token): ?Box {
+        try {
+            $box = Box::where('token', $token)->firstOrFail();
+            return $box;
+        } catch (ModelNotFoundException $e) {
+            return null;
+        }
+    }
+
 
 }    
 

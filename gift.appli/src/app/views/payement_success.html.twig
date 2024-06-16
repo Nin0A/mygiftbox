@@ -4,6 +4,8 @@
 
 {% block content %}
 <div class="payment-success-container">
-    <h2>{{ message }}</h2>
+    <h1>{{ message }}</h1>
+    <p>Accédez à votre coffret en utilisant le lien ci-dessous :</p>
+    <p><a href="{{ access_url }}">{{ access_url }}</a></p>
 </div>
 {% endblock %}

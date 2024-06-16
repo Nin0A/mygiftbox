@@ -18,7 +18,7 @@ use gift\appli\app\actions\GetRegisterAction;
 use gift\appli\app\actions\PostRegisterAction;
 use gift\appli\app\actions\GetBuyAction;
 use gift\appli\app\actions\PostBuyAction;
-
+use gift\appli\app\actions\ShowBoxAction;
 
 
 
@@ -104,6 +104,9 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/payment/{id}', GetBuyAction::class)->setName('get_paymentBox');
 
     $app->post('/payment/{id}', PostBuyAction::class)->setName('post_payment');
+
+    $app->get('/paid/{token}', ShowBoxAction::class)->setName('paid_success');
+
 
 
 
