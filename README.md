@@ -55,7 +55,7 @@
 ##Fonctionnalités détaillées
 
 | Fonctionnalités                                          | Développeur                         | État |
-|:-:                                                       |:-:                                  |:-:|
+|:-                                                       |:-:                                  |:-:|
 | Afficher la liste des prestations                        | Nino                                | Fonctionnel ✅ |
 | Afficher le détail d'une prestation                      | Nino                                | Fonctionnel ✅ |
 | Liste de prestations par catégories                      | Nino                                | Fonctionnel ✅ |
