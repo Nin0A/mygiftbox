@@ -52,7 +52,7 @@
 
 ### Remarques générales :
 
-Nous avons développé toutes les fonctionnalités obligatoires de l'application, mais nous n'avons pas pu implémenter toutes celles en bonus en raison de contraintes de temps et de ressources. Lina n'a apporté aucune contribution au projet, comme le montre le résumé des TDs. Il se peut également que quelques exceptions ne soient pas gérées correctement. Cependant, notre programme est commenté, respecte l'architecture MVC. Ce projet est également disponible sur Docketu ici : xxxxxxxxxx.
+Nous avons développé toutes les fonctionnalités obligatoires de l'application, mais nous n'avons pas pu implémenter toutes celles en bonus en raison de contraintes de temps et de ressources. Lina n'a apporté aucune contribution au projet, comme le montre le résumé des TDs. Il se peut également que quelques exceptions ne soient pas gérées correctement. Cependant, notre programme est commenté, respecte l'architecture MVC. Ce projet est également disponible sur Docketu ici : http://docketu.iutnc.univ-lorraine.fr:10025.
 
 
 
