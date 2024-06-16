@@ -98,10 +98,10 @@ Pour installer ce projet, suivez les étapes ci-dessous :
 2. **Ajouter un fichier `.env` à la racine du projet avec les champs suivants :**
 
     ```plaintext
-    MYSQL_ROOT_PASSWORD=mdp
+    MYSQL_ROOT_PASSWORD=root
     MYSQL_DATABASE=mygiftbox
-    MYSQL_USER=user
-    MYSQL_PASSWORD=mdp
+    MYSQL_USER=root
+    MYSQL_PASSWORD=root
     ```
 
 3. **Ajouter un fichier `.htaccess` dans `gift.appli/public/` :**
