@@ -5,8 +5,8 @@
 {% block content %}
     <link rel="stylesheet" href="/css/categorie-view-page.css">
 
-    <h2 class="title">{{ categorie.libelle }}</h2>
-    <p class="introduction">{{ categorie.description }}</p>
+    <h2 class="title">{{ categorie.libelle | upper }}</h2>
+    <p class="introduction">{{ categorie.description | upper }}</p>
 
     <form method="get" class="form-select">
         <select name="order" onchange="this.form.submit()" class="custom-select">
@@ -22,7 +22,7 @@
                     <img class="img-product" src="{{globals.img_dir}}/{{prestation.img}}">
                 </a>
                 <div class="header-prestation">
-                    <p>{{prestation.libelle}}</p>
+                    <p>{{prestation.libelle | upper }}</p>
                     <p>€{{prestation.tarif}}</p>
                 </div>
                 <p class="description">{{prestation.description}}</p>
