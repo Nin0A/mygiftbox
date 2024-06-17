@@ -5,7 +5,7 @@ services:
     volumes:
       - ./gift.api/public:/var/www/html
       - ./shared/img:/var/www/html/img
-      - ./gift.api/src:/var/www/src
+      - ./gift.api/src:/var/www/html/src
     ports:
       - "10023:80"
     depends_on:
